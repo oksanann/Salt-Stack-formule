@@ -1,0 +1,42 @@
+---
+product: osmax
+doc_type: salt-formula-checklist
+title: Анти-паттерны формул Осмакс
+source_url: https://docs.inno.tech/ru/linux-configuration-manager/latest/maintenance-guide/saltstack/salt-formulas/work-with-formulas/create-formula/
+priority: 4
+---
+
+# Анти-паттерны (чего ИИ не должен делать)
+
+## Структура
+
+- Называть корень не по шаблону `<name>-formula`
+- Класть `.sls` сразу в корень без поддиректории `<name>`
+- Пропускать `clean.sls` или `FORMULA`
+- Использовать точки в именах директорий/`state.sls`-подобных путях кроме расширения
+
+## Pillar / Jinja
+
+- Хардкодить имя формулы вместо `tplroot`
+- Читать параметры минуя `lookup`
+- Класть секреты в SLS или `files/`
+- Передавать пароль через `env` так, что он попадёт в логи
+
+## Состояния
+
+- Дублировать `name` формулы с существующими
+- Генерировать ID состояний с точками
+- Делать apply без симметричного clean
+- Писать неидемпотентный `cmd.run` без `unless`/`onlyif`
+
+## Платформы
+
+- Смешивать Linux и Windows команды в одном состоянии
+- Заявлять Windows в FORMULA без Windows-ветки
+- Использовать `/home/...` и `.desktop` для Windows без адаптации
+
+## Качество ответа
+
+- Отдавать псевдокод/`TODO` вместо файлов
+- Выдумывать несуществующие Salt-модули
+- Игнорировать ближайший `tpl-*` шаблон без причины
