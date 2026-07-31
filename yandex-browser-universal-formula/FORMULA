@@ -1,0 +1,13 @@
+name: yandex-browser-universal
+os: Debian, Ubuntu, AstraLinux, RedHat, Windows
+os_family: Debian, RedHat, Windows
+version: 202607
+release: 1
+summary: Install Yandex Browser on Linux and Windows
+description: >
+  Cross-platform formula to install Yandex Browser.
+  On Debian-family systems imports the official apt repository and installs
+  the package. On RedHat-family systems imports the official rpm repository
+  and installs the package. On Windows installs via Chocolatey by default
+  or via a silent installer URL from pillar.
+top_level_dir: yandex-browser-universal
