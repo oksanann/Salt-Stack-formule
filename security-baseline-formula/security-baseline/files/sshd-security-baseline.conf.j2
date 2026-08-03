@@ -1,0 +1,19 @@
+# Managed by Osmax formula security-baseline. Do not edit manually.
+# {{ salt['pillar.get']('security-baseline:version_id', 'n/a') }}
+
+Protocol {{ ssh.protocol }}
+PermitRootLogin {{ ssh.permit_root_login }}
+PasswordAuthentication {{ ssh.password_authentication }}
+PubkeyAuthentication {{ ssh.pubkey_authentication }}
+ChallengeResponseAuthentication {{ ssh.challenge_response_authentication }}
+UsePAM {{ ssh.use_pam }}
+X11Forwarding {{ ssh.x11_forwarding }}
+MaxAuthTries {{ ssh.max_auth_tries }}
+ClientAliveInterval {{ ssh.client_alive_interval }}
+ClientAliveCountMax {{ ssh.client_alive_count_max }}
+{%- if ssh.allow_users %}
+AllowUsers {{ ssh.allow_users | join(' ') }}
+{%- endif %}
+{%- if ssh.allow_groups %}
+AllowGroups {{ ssh.allow_groups | join(' ') }}
+{%- endif %}
