@@ -1,29 +1,224 @@
 [
-  {"path":"rag/01-rules/01-structure.md","product":"osmax","doc_type":"salt-formula-rules","priority":1,"language":"ru"},
-  {"path":"rag/01-rules/02-formula-metadata.md","product":"osmax","doc_type":"salt-formula-rules","priority":1,"language":"ru"},
-  {"path":"rag/01-rules/03-states-model.md","product":"osmax","doc_type":"salt-formula-rules","priority":1,"language":"ru"},
-  {"path":"rag/01-rules/04-pillar-and-tplroot.md","product":"osmax","doc_type":"salt-formula-rules","priority":1,"language":"ru"},
-  {"path":"rag/01-rules/05-secrets.md","product":"osmax","doc_type":"salt-formula-rules","priority":1,"language":"ru"},
-  {"path":"rag/02-templates/00-overview.md","product":"osmax","doc_type":"salt-formula-example","priority":2,"language":"ru"},
-  {"path":"rag/02-templates/01-state-id-naming.md","product":"osmax","doc_type":"salt-formula-example","priority":2,"language":"ru"},
-  {"path":"rag/02-templates/02-linux-windows.md","product":"osmax","doc_type":"salt-formula-example","priority":2,"language":"ru"},
-  {"path":"rag/03-examples/01-tpl-script.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"tpl-script"},
-  {"path":"rag/03-examples/02-tpl-group-members.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"tpl-group-members"},
-  {"path":"rag/03-examples/03-tpl-shortcut.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"tpl-shortcut"},
-  {"path":"rag/03-examples/04-remote-access-groups-ssh.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"finalized"},
-  {"path":"rag/03-examples/finalized/00-overview.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"finalized"},
-  {"path":"rag/03-examples/finalized/01-pattern-package-repo.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"finalized","pattern":"package-repo"},
-  {"path":"rag/03-examples/finalized/02-agent-update.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"finalized","formula":"agent-update"},
-  {"path":"rag/03-examples/finalized/03-get-hostname.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"finalized","formula":"get-hostname"},
-  {"path":"rag/03-examples/finalized/04-file-find.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"finalized","formula":"file-find"},
-  {"path":"rag/03-examples/finalized/05-google-chrome.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"finalized","formula":"google-chrome"},
-  {"path":"rag/03-examples/finalized/06-google-chrome-reboot.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"finalized","formula":"google-chrome-reboot"},
-  {"path":"rag/03-examples/finalized/07-yandex-browser.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"finalized","formula":"yandex-browser"},
-  {"path":"rag/03-examples/finalized/08-pattern-remote-access.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"finalized","pattern":"remote-access"},
-  {"path":"rag/03-examples/finalized/09-remote-access-groups-xrdp.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"finalized","formula":"remote-access-groups-xrdp"},
-  {"path":"rag/03-examples/finalized/10-remote-access-groups-tigervnc.md","product":"osmax","doc_type":"salt-formula-example","priority":3,"language":"ru","template":"finalized","formula":"remote-access-groups-tigervnc"},
-  {"path":"rag/04-checklists/01-validation-checklist.md","product":"osmax","doc_type":"salt-formula-checklist","priority":4,"language":"ru"},
-  {"path":"rag/04-checklists/02-anti-patterns.md","product":"osmax","doc_type":"salt-formula-checklist","priority":4,"language":"ru"},
-  {"path":"rag/05-prompts/system-prompt-salt-formulas.md","product":"osmax","doc_type":"salt-formula-prompt","priority":5,"language":"ru","index":false},
-  {"path":"rag/05-prompts/user-prompt-templates.md","product":"osmax","doc_type":"salt-formula-prompt","priority":5,"language":"ru"}
+  {
+    "path": "rag/01-rules/01-structure.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-rules",
+    "priority": 1,
+    "language": "ru"
+  },
+  {
+    "path": "rag/01-rules/02-formula-metadata.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-rules",
+    "priority": 1,
+    "language": "ru"
+  },
+  {
+    "path": "rag/01-rules/03-states-model.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-rules",
+    "priority": 1,
+    "language": "ru"
+  },
+  {
+    "path": "rag/01-rules/04-pillar-and-tplroot.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-rules",
+    "priority": 1,
+    "language": "ru"
+  },
+  {
+    "path": "rag/01-rules/05-secrets.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-rules",
+    "priority": 1,
+    "language": "ru"
+  },
+  {
+    "path": "rag/01-rules/06-python-builder-output.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-rules",
+    "priority": 1,
+    "language": "ru"
+  },
+  {
+    "path": "rag/02-templates/00-overview.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 2,
+    "language": "ru"
+  },
+  {
+    "path": "rag/02-templates/01-state-id-naming.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 2,
+    "language": "ru"
+  },
+  {
+    "path": "rag/02-templates/02-linux-windows.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 2,
+    "language": "ru"
+  },
+  {
+    "path": "rag/03-examples/01-tpl-script.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "tpl-script"
+  },
+  {
+    "path": "rag/03-examples/02-tpl-group-members.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "tpl-group-members"
+  },
+  {
+    "path": "rag/03-examples/03-tpl-shortcut.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "tpl-shortcut"
+  },
+  {
+    "path": "rag/03-examples/04-remote-access-groups-ssh.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "finalized"
+  },
+  {
+    "path": "rag/03-examples/finalized/00-overview.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "finalized"
+  },
+  {
+    "path": "rag/03-examples/finalized/01-pattern-package-repo.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "finalized",
+    "pattern": "package-repo"
+  },
+  {
+    "path": "rag/03-examples/finalized/02-agent-update.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "finalized",
+    "formula": "agent-update"
+  },
+  {
+    "path": "rag/03-examples/finalized/03-get-hostname.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "finalized",
+    "formula": "get-hostname"
+  },
+  {
+    "path": "rag/03-examples/finalized/04-file-find.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "finalized",
+    "formula": "file-find"
+  },
+  {
+    "path": "rag/03-examples/finalized/05-google-chrome.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "finalized",
+    "formula": "google-chrome"
+  },
+  {
+    "path": "rag/03-examples/finalized/06-google-chrome-reboot.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "finalized",
+    "formula": "google-chrome-reboot"
+  },
+  {
+    "path": "rag/03-examples/finalized/07-yandex-browser.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "finalized",
+    "formula": "yandex-browser"
+  },
+  {
+    "path": "rag/03-examples/finalized/08-pattern-remote-access.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "finalized",
+    "pattern": "remote-access"
+  },
+  {
+    "path": "rag/03-examples/finalized/09-remote-access-groups-xrdp.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "finalized",
+    "formula": "remote-access-groups-xrdp"
+  },
+  {
+    "path": "rag/03-examples/finalized/10-remote-access-groups-tigervnc.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-example",
+    "priority": 3,
+    "language": "ru",
+    "template": "finalized",
+    "formula": "remote-access-groups-tigervnc"
+  },
+  {
+    "path": "rag/04-checklists/01-validation-checklist.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-checklist",
+    "priority": 4,
+    "language": "ru"
+  },
+  {
+    "path": "rag/04-checklists/02-anti-patterns.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-checklist",
+    "priority": 4,
+    "language": "ru"
+  },
+  {
+    "path": "rag/05-prompts/system-prompt-salt-formulas.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-prompt",
+    "priority": 5,
+    "language": "ru",
+    "index": false
+  },
+  {
+    "path": "rag/05-prompts/user-prompt-templates.md",
+    "product": "osmax",
+    "doc_type": "salt-formula-prompt",
+    "priority": 5,
+    "language": "ru"
+  }
 ]

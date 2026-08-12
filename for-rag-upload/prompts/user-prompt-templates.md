@@ -19,8 +19,9 @@ priority: 5
 - clean: да
 - идемпотентность: да
 
-Опирайся на правила create-formula и примеры tpl-*.
-Верни полный набор файлов формулы.
+Опирайся на правила create-formula и примеры tpl-* / готовые формулы.
+Верни НЕ список файлов, а один Python 3 скрипт build_*_formula.py,
+который создаёт папку формулы со всеми файлами.
 ```
 
 ## Скрипт
@@ -32,6 +33,7 @@ Linux,
 скрипт пишет hostname и date в /var/local/my-audit-script.run.id,
 повторный запуск запрещён unless,
 clean удаляет маркер.
+Ответ — Python-скрипт сборки формулы в папку.
 ```
 
 ## Группы
@@ -43,6 +45,7 @@ clean удаляет маркер.
 change=add,
 пользователи из lookup.users,
 clean удаляет группу.
+Ответ — Python-скрипт сборки формулы в папку.
 ```
 
 ## Ярлык
@@ -54,6 +57,7 @@ Linux,
 URL-ярлык на https://portal.example.com,
 пользователи из lookup.user.usernames (если пусто — /home),
 clean удаляет .desktop.
+Ответ — Python-скрипт сборки формулы в папку.
 ```
 
 ## Кроссплатформенный скрипт
@@ -63,4 +67,5 @@ clean удаляет .desktop.
 Linux: shell /bin/sh, маркер /var/local/my-marker-script.run.id
 Windows: powershell, маркер C:\ProgramData\osmax\my-marker-script.run.id
 Параметры через lookup, clean удаляет маркер на обеих ОС.
+Ответ — Python-скрипт сборки формулы в папку.
 ```

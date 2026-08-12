@@ -40,10 +40,21 @@
 ## Как собрать запрос к LLM
 
 ```text
-[SYSTEM]  = содержимое блока ```text``` из 05-prompts/system-prompt-salt-formulas.md
-[CONTEXT] = top-K чанков из файлов №1–25
+[SYSTEM]  = содержимое prompts/system-prompt.txt  (или блока ```text``` из system-prompt-salt-formulas.md)
+[CONTEXT] = top-K чанков из documents/ (файлы №1–N)
 [USER]    = шаблон из user-prompt-templates.md + задача пользователя
 ```
+
+## Формат ответа ИИ
+
+Не список файлов. Один Python 3 скрипт:
+
+```bash
+python3 build_<formula>_formula.py
+python3 build_<formula>_formula.py --out ./dist
+```
+
+Создаёт папку `<formula>-formula/` со всеми файлами формулы.
 
 ## System prompt (для копирования)
 
