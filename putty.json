@@ -1,0 +1,69 @@
+{
+  "name": "putty",
+  "top_level_dir": "putty",
+  "os": ["linux", "windows"],
+  "os_family": ["Debian", "RedHat", "Windows"],
+  "summary": "Установка PuTTY",
+  "description": "Формула установки PuTTY на Astra Linux (Debian), ALT Linux (RedHat) и Windows через pkg/chocolatey",
+  "with_repo": false,
+  "release": 1,
+  "pillar_lookup": {
+    "pkg": {
+      "name": "putty",
+      "version": ""
+    },
+    "windows": {
+      "method": "chocolatey",
+      "chocolatey_name": "putty",
+      "installer_url": "",
+      "installer_path": "C:\\Windows\\Temp\\putty-installer.exe",
+      "install_args": "/S",
+      "uninstall_name": "PuTTY"
+    }
+  },
+  "map_defaults": {
+    "default": {
+      "pkg": {
+        "name": "putty",
+        "version": ""
+      },
+      "windows": {
+        "method": "chocolatey",
+        "chocolatey_name": "putty",
+        "installer_url": "",
+        "installer_path": "C:\\Windows\\Temp\\putty-installer.exe",
+        "install_args": "/S",
+        "uninstall_name": "PuTTY"
+      }
+    },
+    "Debian": {
+      "pkg": {
+        "name": "putty",
+        "version": ""
+      }
+    },
+    "RedHat": {
+      "pkg": {
+        "name": "putty",
+        "version": ""
+      }
+    },
+    "Windows": {
+      "pkg": {
+        "name": "putty",
+        "version": "",
+        "fromrepo": ""
+      }
+    }
+  },
+  "windows": {
+    "method": "chocolatey",
+    "chocolatey_name": "putty"
+  },
+  "notes": [
+    "Astra Linux → Debian family",
+    "ALT Linux → RedHat family",
+    "Windows → chocolatey package putty",
+    "with_repo=false: external repo not required"
+  ]
+}

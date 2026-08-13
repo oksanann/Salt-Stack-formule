@@ -1,0 +1,13 @@
+name: yandex-browser
+os:
+  - linux
+  - windows
+os_family:
+  - Debian
+  - RedHat
+  - Windows
+version: 202608
+release: 1
+summary: "��������� ������ �������"
+description: "������� ��������� ������ �������� �� Astra Linux (Debian), ALT Linux (RedHat) � Windows ����� ����������� ����������� � Chocolatey"
+top_level_dir: yandex-browser

@@ -1,0 +1,3 @@
+putty:
+  # Override map.jinja defaults
+  lookup: {"pkg":{"name":"putty","version":""},"windows":{"method":"chocolatey","chocolatey_name":"putty","installer_url":"","installer_path":"C:\\Windows\\Temp\\putty-installer.exe","install_args":"/S","uninstall_name":"PuTTY"}}

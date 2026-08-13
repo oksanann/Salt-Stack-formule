@@ -1,0 +1,104 @@
+{
+  "name": "yandex-browser",
+  "top_level_dir": "yandex-browser",
+  "os": ["linux", "windows"],
+  "os_family": ["Debian", "RedHat", "Windows"],
+  "summary": "Установка Яндекс Браузера",
+  "description": "Формула установки Яндекс Браузера на Astra Linux (Debian), ALT Linux (RedHat) и Windows через официальный репозиторий и Chocolatey",
+  "with_repo": true,
+  "release": 1,
+  "pillar_lookup": {
+    "pkg": {
+      "name": "yandex-browser-stable",
+      "version": "",
+      "fromrepo": "stable"
+    },
+    "repo": {
+      "name": "deb http://repo.yandex.ru/yandex-browser/deb stable",
+      "disabled": false,
+      "comps": "main,contrib,non-free",
+      "conf_name": "yandex-browser",
+      "key_file": "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG",
+      "key_file_dearmor": true,
+      "key_keyrings_dir": "/etc/apt/keyrings/",
+      "required_packages": ["gpg"],
+      "file": "/etc/apt/sources.list.d/yandex-browser.list",
+      "humanname": "Yandex Browser"
+    },
+    "windows": {
+      "method": "chocolatey",
+      "chocolatey_name": "yandexbrowser",
+      "installer_url": "",
+      "installer_path": "C:\\Windows\\Temp\\yandex-browser-setup.exe",
+      "install_args": "/silent /install",
+      "uninstall_name": "Yandex"
+    }
+  },
+  "map_defaults": {
+    "default": {
+      "pkg": {
+        "name": "yandex-browser-stable",
+        "version": "",
+        "fromrepo": "stable"
+      },
+      "repo": {
+        "name": "",
+        "disabled": false,
+        "comps": "",
+        "conf_name": "yandex-browser",
+        "key_file": "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG",
+        "key_file_dearmor": true,
+        "key_keyrings_dir": "/etc/apt/keyrings/",
+        "required_packages": ["gpg"],
+        "file": "",
+        "humanname": "Yandex Browser"
+      },
+      "windows": {
+        "method": "chocolatey",
+        "chocolatey_name": "yandexbrowser",
+        "installer_url": "",
+        "installer_path": "C:\\Windows\\Temp\\yandex-browser-setup.exe",
+        "install_args": "/silent /install",
+        "uninstall_name": "Yandex"
+      }
+    },
+    "Debian": {
+      "repo": {
+        "name": "deb http://repo.yandex.ru/yandex-browser/deb stable",
+        "comps": "main,contrib,non-free",
+        "file": "/etc/apt/sources.list.d/yandex-browser.list",
+        "humanname": "Yandex Browser"
+      }
+    },
+    "RedHat": {
+      "repo": {
+        "name": "https://repo.yandex.ru/yandex-browser/rpm/stable/$basearch/",
+        "key_file_dearmor": false,
+        "key_keyrings_dir": "/etc/pki/rpm-gpg/",
+        "required_packages": [],
+        "file": "/etc/yum.repos.d/yandex-browser.repo",
+        "humanname": "Yandex Browser"
+      }
+    },
+    "Windows": {
+      "pkg": {
+        "name": "yandexbrowser",
+        "version": "",
+        "fromrepo": ""
+      },
+      "repo": {
+        "name": "",
+        "disabled": true
+      }
+    }
+  },
+  "windows": {
+    "method": "chocolatey",
+    "chocolatey_name": "yandexbrowser"
+  },
+  "notes": [
+    "Astra Linux использует ветку Debian",
+    "ALT Linux использует ветку RedHat",
+    "На Windows repo не импортируется, установка через chocolatey.installed"
+  ]
+}
