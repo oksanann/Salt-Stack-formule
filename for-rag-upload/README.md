@@ -35,15 +35,21 @@ for-rag-upload/
 | System prompts | 3 |
 | User prompt templates | 3 |
 
-## Формат ответа ИИ
+## Рекомендуемый режим: JSON → bash-рендерер
 
-Один **bash-скрипт**, который создаёт `<name>-formula/` со всеми файлами.
+1. System prompt: `prompts/system-prompt-json-spec.txt`
+2. ИИ возвращает только JSON-спецификацию
+3. Сборка формулы:
 
 ```bash
-chmod +x create_<name>_formula.sh
-./create_<name>_formula.sh
+# сохранить JSON из чата в spec.json
+./tools/render_formula.sh --spec ./spec.json --out ./dist
 ```
 
-## Альтернативный режим
+Примеры JSON: `examples/specs/nginx.json`, `examples/specs/yandex-browser.json`  
+Контракт: `documents/01-rules/11-json-spec-contract.md`
 
-Python-сборщик: используй `prompts/system-prompt.txt` + `documents/01-rules/06-python-builder-output.md`.
+## Legacy-режимы
+
+- Bash от ИИ: `prompts/system-prompt-bash-generator.txt` (часто ломается)
+- Python-сборщик: `prompts/system-prompt.txt`

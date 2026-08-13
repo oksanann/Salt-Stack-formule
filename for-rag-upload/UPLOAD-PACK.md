@@ -5,17 +5,24 @@
 
 ---
 
-## Быстрый старт (5 шагов)
+## Быстрый старт (рекомендуется: JSON → рендерер)
 
 | Шаг | Действие | Файл / папка |
 |-----|----------|--------------|
-| 1 | Загрузить в RAG все файлы из `documents/` | см. [Порядок загрузки](#порядок-загрузки-31-файл) |
-| 2 | Вставить **system prompt** в настройки чата | `prompts/system-prompt-bash-generator.txt` |
-| 3 | Настроить chunking | 500–800 токенов, overlap 100–150 |
-| 4 | Задать retrieval filter | `product=osmax`, top_k=6–8 |
-| 5 | Отправить user prompt | `prompts/user-prompt-yandex-browser.md` или свой текст |
+| 1 | Загрузить в RAG всё из `documents/` (+ `11-json-spec-contract.md`) | `UPLOAD-ORDER.txt` |
+| 2 | System prompt | `prompts/system-prompt-json-spec.txt` |
+| 3 | User prompt → получить JSON | `prompts/user-prompt-json-yandex-browser.md` |
+| 4 | Сохранить ответ в `spec.json` | |
+| 5 | Собрать формулу | `./tools/render_formula.sh --spec ./spec.json --out ./dist` |
 
-**Формат ответа ИИ:** один исполняемый **bash-скрипт**, который создаёт папку `<name>-formula/`.
+Примеры JSON: `examples/specs/nginx.json`, `examples/specs/yandex-browser.json`  
+Контракт: `documents/01-rules/11-json-spec-contract.md`
+
+**Формат ответа ИИ:** только JSON. Bash пишет **фиксированный** `tools/render_formula.sh` (не ИИ).
+
+### Legacy (ИИ пишет bash сам) — не рекомендуется
+
+System prompt: `prompts/system-prompt-bash-generator.txt` — часто даёт пустые файлы / битый heredoc.
 
 ---
 
@@ -53,7 +60,8 @@ for-rag-upload/
 | 6 | `documents/01-rules/07-os-specific-mapping.md` | Astra→Debian, ALT→RedHat, Windows |
 | 7 | `documents/01-rules/08-bash-generator-contract.md` | Контракт bash-генератора |
 | 8 | `documents/01-rules/09-output-format-policy.md` | Формат ответа ИИ |
-| 9 | `documents/01-rules/06-python-builder-output.md` | Альтернатива: Python-сборщик (опционально) |
+| 9 | `documents/01-rules/10-bash-generator-reference.md` | **Эталон рабочего bash-скрипта** |
+| 10 | `documents/01-rules/06-python-builder-output.md` | Python-сборщик (для сложных формул) |
 
 ### Блок 2 — Шаблоны (priority 2)
 
@@ -92,8 +100,28 @@ for-rag-upload/
 | 30 | `documents/04-checklists/03-generation-flow.md` | Flow генерации |
 | 31 | `documents/04-checklists/04-preflight-inputs.md` | Preflight входных данных |
 | 32 | `documents/04-checklists/05-postgen-smoke-test.md` | Smoke-test после запуска скрипта |
+| 33 | `documents/04-checklists/06-bash-quality-gates.md` | Запрет пустых файлов |
 
-> **Итого в RAG:** 32 файла (если включать `06-python-builder-output.md` — альтернативный режим).
+> **Итого в RAG:** 33 файла.
+
+---
+
+## Если ИИ генерирует плохой bash (пустые файлы / ошибки)
+
+1. Обнови **system prompt** → `prompts/system-prompt-bash-generator.txt`
+2. Перезагрузи в RAG с высоким приоритетом:
+   - `10-bash-generator-reference.md`
+   - `06-bash-quality-gates.md`
+3. В user prompt добавь:
+   ```text
+   Используй паттерн write_file из 10-bash-generator-reference.md.
+   Запрещены пустые файлы и TODO. Self-check: fail_if_empty.
+   ```
+4. Для сложных формул (repo + Windows) — попроси **Python**:
+   ```text
+   Сгенерируй Python build_*_formula.py, не bash.
+   ```
+5. Проверь эталон: `examples/reference_build_nginx_formula.sh`
 
 ---
 

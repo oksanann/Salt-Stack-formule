@@ -10,6 +10,8 @@ documents/01-rules/05-secrets.md
 documents/01-rules/07-os-specific-mapping.md
 documents/01-rules/08-bash-generator-contract.md
 documents/01-rules/09-output-format-policy.md
+documents/01-rules/10-bash-generator-reference.md
+documents/01-rules/11-json-spec-contract.md
 documents/01-rules/06-python-builder-output.md
 
 # === BLOCK 2: TEMPLATES (priority 2) ===
@@ -40,6 +42,7 @@ documents/04-checklists/02-anti-patterns.md
 documents/04-checklists/03-generation-flow.md
 documents/04-checklists/04-preflight-inputs.md
 documents/04-checklists/05-postgen-smoke-test.md
+documents/04-checklists/06-bash-quality-gates.md
 
 # === NOT FOR RAG (system/user prompts) ===
 # prompts/system-prompt-bash-generator.txt
