@@ -1,0 +1,58 @@
+{
+  "name": "chrome-desktop-shortcut-allusers",
+  "top_level_dir": "chrome-desktop-shortcut-allusers",
+  "os": ["windows"],
+  "os_family": ["Windows"],
+  "with_repo": false,
+  "release": 1,
+  "summary": "Создать ярлык Google Chrome на Public Desktop для всех пользователей (Windows)",
+  "description": "Формула создаёт/обновляет .lnk для Chrome на C:\\Users\\Public\\Desktop. Целевая точка берётся из exe_custom или (если нет) из exe_x64/exe_x86.",
+  "pillar_lookup": {
+    "desktop": {
+      "public_desktop_dir": "C:\\Users\\Public\\Desktop"
+    },
+    "link": {
+      "lnk_name": "Google Chrome.lnk"
+    },
+    "chrome": {
+      "exe_custom": "",
+      "exe_x64": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "exe_x86": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+    }
+  },
+  "map_defaults": {
+    "default": {
+      "pkg": {
+        "name": "dummy",
+        "version": ""
+      },
+      "windows": {
+        "method": "chocolatey",
+        "chocolatey_name": "dummy",
+        "installer_url": "",
+        "installer_path": "C:\\Windows\\Temp\\dummy-installer.exe",
+        "install_args": "/S",
+        "uninstall_name": "dummy"
+      },
+      "desktop": {
+        "public_desktop_dir": "C:\\Users\\Public\\Desktop"
+      },
+      "link": {
+        "lnk_name": "Google Chrome.lnk"
+      },
+      "chrome": {
+        "exe_custom": "",
+        "exe_x64": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "exe_x86": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+      }
+    }
+  },
+  "windows": {
+    "method": "chocolatey",
+    "chocolatey_name": "dummy"
+  },
+  "notes": [
+    "Generator создаст стандартный package/init/clean. Для нашей формулы эти части нужно заменить на кастомные init.sls/clean.sls и файлы create-chrome-desktop-shortcut-allusers.ps1.",
+    "После рендера проще всего скопировать содержимое директории chrome-desktop-shortcut-allusers-formula/chrome-desktop-shortcut-allusers в dist/.../chrome-desktop-shortcut-allusers и перезаписать FORMULA/pillar.example."
+  ]
+}

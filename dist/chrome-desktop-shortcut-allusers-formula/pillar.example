@@ -1,0 +1,11 @@
+chrome-desktop-shortcut-allusers:
+  lookup:
+    desktop:
+      public_desktop_dir: 'C:\\Users\\Public\\Desktop'
+    link:
+      lnk_name: 'Google Chrome.lnk'
+    chrome:
+      # If set and exists, this executable path is preferred
+      exe_custom: ''
+      exe_x64: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+      exe_x86: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'

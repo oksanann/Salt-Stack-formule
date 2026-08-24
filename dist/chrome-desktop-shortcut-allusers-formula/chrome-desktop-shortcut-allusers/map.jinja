@@ -1,0 +1,27 @@
+{# -*- coding: utf-8 -*- #}
+{# vim: ft=jinja #}
+
+{% set mapdata = salt['grains.filter_by']({
+    'default': {
+      'desktop': {
+        'public_desktop_dir': 'C:\\Users\\Public\\Desktop',
+      },
+      'link': {
+        'lnk_name': 'Google Chrome.lnk',
+        'description': 'Google Chrome',
+      },
+      'chrome': {
+        'exe_custom': '',
+        'exe_x64': 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+        'exe_x86': 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+      },
+    },
+  },
+  merge=salt['pillar.get']('chrome-desktop-shortcut-allusers:lookup'),
+  base='default'
+) %}
+
+{# Compose final shortcut path #}
+{% set mapdata = dict(mapdata) %}
+{% set mapdata = dict(mapdata, link=dict(mapdata.link, lnk_path=mapdata.desktop.public_desktop_dir ~ '\\' ~ mapdata.link.lnk_name)) %}
+

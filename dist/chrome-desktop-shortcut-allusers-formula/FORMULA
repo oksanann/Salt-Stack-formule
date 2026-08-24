@@ -1,0 +1,10 @@
+name: chrome-desktop-shortcut-allusers
+os: Windows
+os_family: Windows
+version: 202608
+release: 1
+summary: Create Chrome shortcut on Public Desktop for all users
+description: >
+  Creates/updates a Google Chrome shortcut (.lnk) on the Windows Public
+  Desktop (C:\\Users\\Public\\Desktop) so it is visible for all users.
+top_level_dir: chrome-desktop-shortcut-allusers
