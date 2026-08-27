@@ -37,17 +37,31 @@ priority: 2
 
 ```jinja
 {%- if grains['os_family'] == 'Windows' %}
-# Windows states: win_*, file.managed с Windows-путями, powershell
+{# Windows: prefer winrepo (pkg.installed), else chocolatey / installer #}
 {%- else %}
 # Linux states: pkg.*, file.*, cmd.script с /bin/sh
 {%- endif %}
 ```
+
+Для скриптов/маркеров берите пути из `mapdata` (`marker_path`, `shell`), а не хардкодьте Linux-пути в SLS.
+
+## Windows methods (package formulas)
+
+| method | Модуль | Когда |
+|--------|--------|-------|
+| `winrepo` | `pkg.installed` | Default в Осмакс/Salt winrepo |
+| `chocolatey` | `chocolatey.installed` | Через pillar |
+| `installer` | `file.managed` + `cmd.run` | Прямой MSI/EXE URL |
+
+Pillar может переопределить `repo.*` на Linux и `windows.method` на Windows.
+См. `12-repos-winrepo-pillar.md`.
 
 ## Запрещено
 
 - Linux-команды (`test -f`, `bash`) в ветке Windows.
 - POSIX-пути в ветке Windows без адаптации.
 - Один и тот же `shell` для обеих платформ без override в map.jinja.
+- Default Windows method `chocolatey`, если правила требуют `winrepo` (если пользователь явно не просил chocolatey).
 
 ## FORMULA.os / os_family
 

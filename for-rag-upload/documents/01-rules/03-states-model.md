@@ -42,6 +42,18 @@ priority: 1
 
 Устанавливает пакет `{{formula-name}}`.
 
+На Linux: `pkg.installed` (имя/версия из `mapdata` / pillar lookup).
+
+На Windows — по `lookup.windows.method`:
+
+| method | Модуль Salt | Имя пакета |
+|--------|-------------|------------|
+| `winrepo` (предпочтительно) | `pkg.installed` | `windows.winrepo_name` |
+| `chocolatey` | `chocolatey.installed` | `windows.chocolatey_name` |
+| `installer` | `file.managed` + `cmd.run` | URL из `windows.installer_url` |
+
+Clean должен удалять тем же методом (`pkg.removed` / `chocolatey.uninstalled` / uninstall installer).
+
 ## Состояние {{formula-name}}.clean
 
 Мета-состояние отката. Отменяет действия `{{formula-name}}` **в обратном порядке**:

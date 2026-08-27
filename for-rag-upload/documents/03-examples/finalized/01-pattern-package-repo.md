@@ -30,6 +30,8 @@ Clean (обратный порядок):
 
 ## Типовой lookup
 
+`repo.*` **переопределяемы через pillar** (другой mirror / offline). Пустой `repo.name` — не импортировать.
+
 ```yaml
 <formula-name>:
   lookup:
@@ -38,16 +40,21 @@ Clean (обратный порядок):
       version: ''          # пусто = latest
       fromrepo: ''
     repo:
-      name: 'deb http://example/repo stable main'  # пусто = repo не импортировать
+      name: 'deb https://official.example/repo stable main'  # или корпоративный mirror
       disabled: False
-      comps: ''
+      comps: 'main'
       conf_name: 'example'
-      key_file: 'https://example/KEY.GPG'
+      key_file: 'https://official.example/KEY.GPG'
       key_file_dearmor: True
       key_keyrings_dir: '/etc/apt/keyrings/'
       required_packages: [ 'gpg' ]
+      file: '/etc/apt/sources.list.d/example.list'
+    windows:
+      method: winrepo
+      winrepo_name: <package-name>
 ```
 
+Рабочие эталонные URL: см. `12-repos-winrepo-pillar.md` (Yandex, Chrome).
 ## Вариант с reboot
 
 Дополнительно в lookup:

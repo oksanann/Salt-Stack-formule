@@ -112,3 +112,5 @@ my-script-clean-file-absent:
 - Скрипт сообщает Salt через state line `changed=yes comment='...'`.
 - `clean` удаляет маркер.
 - Источник скрипта: `salt://{{ tpldir }}/files/...`.
+- Путь маркера и `shell` берите из `map.jinja` (`marker_path`), не хардкодьте Linux-путь, если заявлена Windows.
+- Этот шаблон — для скриптов, не для package/repo/winrepo (см. finalized package patterns).

@@ -8,6 +8,6 @@ os_family:
   - Windows
 version: 202608
 release: 1
-summary: "��������� ������ �������"
-description: "������� ��������� ������ �������� �� Astra Linux (Debian), ALT Linux (RedHat) � Windows ����� ����������� ����������� � Chocolatey"
+summary: "Установка Яндекс Браузера"
+description: "Формула установки Яндекс Браузера на Astra Linux (Debian), ALT Linux (RedHat) и Windows. Repo URL переопределяется через pillar lookup. Windows: winrepo (по умолчанию)."
 top_level_dir: yandex-browser

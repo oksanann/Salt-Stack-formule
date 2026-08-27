@@ -99,8 +99,8 @@ for-rag-upload/
 | 29 | `documents/04-checklists/02-anti-patterns.md` | Анти-паттерны |
 | 30 | `documents/04-checklists/03-generation-flow.md` | Flow генерации |
 | 31 | `documents/04-checklists/04-preflight-inputs.md` | Preflight входных данных |
-| 32 | `documents/04-checklists/05-postgen-smoke-test.md` | Smoke-test после запуска скрипта |
-| 33 | `documents/04-checklists/06-bash-quality-gates.md` | Запрет пустых файлов |
+| 32 | `documents/04-checklists/05-postgen-smoke-test.md` | Smoke-test после render_formula.sh |
+| 33 | `documents/04-checklists/06-json-quality-gates.md` | Quality gates JSON + renderer |
 
 > **Итого в RAG:** 33 файла.
 
@@ -111,7 +111,7 @@ for-rag-upload/
 1. Обнови **system prompt** → `prompts/system-prompt-bash-generator.txt`
 2. Перезагрузи в RAG с высоким приоритетом:
    - `10-bash-generator-reference.md`
-   - `06-bash-quality-gates.md`
+   - `06-json-quality-gates.md`
 3. В user prompt добавь:
    ```text
    Используй паттерн write_file из 10-bash-generator-reference.md.

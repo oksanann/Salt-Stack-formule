@@ -18,7 +18,7 @@ priority: 2
 4. Обновить `pillar.example`, `FORMULA`, скрипты/файлы.
 5. Сохранить `clean.sls` как полный откат apply.
 
-## Каталог шаблонов
+## Каталог шаблонов `tpl-*`
 
 | Шаблон | Когда выбирать |
 |--------|----------------|
@@ -26,6 +26,20 @@ priority: 2
 | `tpl-group-members` | Управление локальными группами и членством |
 | `tpl-shortcut` | Ярлыки приложений, URL-ссылки, symlink на Desktop |
 
+## Когда `tpl-*` НЕ подходит
+
+Для установки пакетов / внешнего repo / Windows winrepo используйте паттерны из `03-examples/finalized/`:
+
+| Задача | Паттерн |
+|--------|---------|
+| Пакет + внешний repo + key | `01-pattern-package-repo`, `google-chrome`, `yandex-browser` |
+| Пакет без внешнего repo | `agent-update`, `putty` (with_repo=false) |
+| Windows установка | `winrepo` (default), см. `12-repos-winrepo-pillar.md` |
+
+Не подгоняйте package-формулу под `tpl-script`.
+
 ## Правило выбора
 
-Сначала выберите ближайший `tpl-*`, затем адаптируйте. Не создавайте новую архитектуру формулы без причины, если подходит существующий шаблон.
+1. Сначала выберите ближайший `tpl-*` **или** finalized package-pattern.
+2. Не создавайте новую архитектуру без причины.
+3. Linux/Windows ветки и methods — по `02-linux-windows.md` и `07-os-specific-mapping.md`.

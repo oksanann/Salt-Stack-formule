@@ -6,40 +6,56 @@ source_url: https://docs.inno.tech/ru/linux-configuration-manager/latest/mainten
 priority: 4
 ---
 
-# Анти-паттерны (чего ИИ не должен делать)
+# Анти-паттерны (чего ИИ / генератор не должен делать)
+
+## Пайплайн ответа
+
+- Отдавать bash/Python-сборщик вместо **JSON-спецификации** (в JSON-режиме)
+- Отдавать список файлов для ручного копирования
+- Отдавать псевдокод / `TODO` / пустой JSON
+- Сохранять JSON как бинарный/AppleScript файл вместо UTF-8 text
 
 ## Структура
 
-- Называть корень не по шаблону `<name>-formula`
-- Класть `.sls` сразу в корень без поддиректории `<name>`
-- Пропускать `clean.sls` или `FORMULA`
-- Использовать точки в именах директорий/`state.sls`-подобных путях кроме расширения
+- Корень не по шаблону `<name>-formula`
+- `.sls` в корне без поддиректории `<name>`
+- Пропуск `clean.sls` или `FORMULA`
+- Точки в именах директорий (кроме расширения `.sls`)
+- `repository/` при `with_repo=false` (или наоборот — нет repo при `with_repo=true`)
 
-## Pillar / Jinja
+## Pillar / Jinja / repo
 
-- Хардкодить имя формулы вместо `tplroot`
-- Читать параметры минуя `lookup`
-- Класть секреты в SLS или `files/`
-- Передавать пароль через `env` так, что он попадёт в логи
+- Хардкод имени формулы вместо `tplroot` в SLS
+- Параметры минуя `lookup`
+- Захардкоженный repo без возможности override через pillar
+- Устаревшие URL: `http://repo.yandex.ru/...`, comps `main,contrib,non-free` для Yandex
+- Placeholder URL (`example.com`) в production-примерах без пометки «заглушка»
+- Секреты в SLS/`files/`; пароль через `env` в логи
 
 ## Состояния
 
-- Дублировать `name` формулы с существующими
-- Генерировать ID состояний с точками
-- Делать apply без симметричного clean
-- Писать неидемпотентный `cmd.run` без `unless`/`onlyif`
+- Дубли `name` формулы
+- ID состояний с точками
+- Apply без симметричного clean
+- Неидемпотентный `cmd.run` без `unless`/`onlyif`
 
-## Платформы
+## Платформы / Windows
 
 - Смешивать Linux и Windows команды в одном состоянии
-- Заявлять Windows в FORMULA без Windows-ветки
-- Использовать `/home/...` и `.desktop` для Windows без адаптации
+- Windows в FORMULA без Windows-ветки
+- Default Windows = `chocolatey`, когда правила требуют **`winrepo`**
+- Отсутствие `windows.winrepo_name` при `method: winrepo`
+- Linux-пути/`test -f` в Windows-ветке
 
-## Качество ответа
+## Выбор шаблона
 
-- Отдавать список файлов для ручного копирования вместо Python-сборщика
-- Отдавать псевдокод/`TODO` вместо рабочего `build_*_formula.py`
-- Требовать внешние pip-зависимости для сборщика
-- Выполнять в сборщике shell/network/удаление чужих каталогов
-- Выдумывать несуществующие Salt-модули
-- Игнорировать ближайший `tpl-*` шаблон без причины
+- Package/repo-формулу строить как `tpl-script`
+- Игнорировать ближайший `tpl-*` или finalized package-pattern без причины
+
+## Сборка (render / legacy bash)
+
+- Пустые файлы / только комментарии-заглушки
+- `touch` без содержимого
+- Heredoc без `'EOF'` для Jinja (legacy bash)
+- Self-check только на существование файла, без `-s` (non-empty)
+- Выдуманные модули Salt

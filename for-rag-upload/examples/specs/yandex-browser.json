@@ -4,7 +4,7 @@
   "os": ["linux", "windows"],
   "os_family": ["Debian", "RedHat", "Windows"],
   "summary": "Установка Яндекс Браузера",
-  "description": "Формула установки Яндекс Браузера на Astra Linux (Debian), ALT Linux (RedHat) и Windows",
+  "description": "Формула установки Яндекс Браузера на Astra Linux (Debian), ALT Linux (RedHat) и Windows. Repo URL переопределяется через pillar lookup. Windows: winrepo (по умолчанию).",
   "with_repo": true,
   "release": 1,
   "pillar_lookup": {
@@ -14,9 +14,9 @@
       "fromrepo": "stable"
     },
     "repo": {
-      "name": "deb http://repo.yandex.ru/yandex-browser/deb stable",
+      "name": "deb https://repo.yandex.ru/yandex-browser/deb stable main",
       "disabled": false,
-      "comps": "main,contrib,non-free",
+      "comps": "main",
       "conf_name": "yandex-browser",
       "key_file": "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG",
       "key_file_dearmor": true,
@@ -26,7 +26,8 @@
       "humanname": "Yandex Browser"
     },
     "windows": {
-      "method": "chocolatey",
+      "method": "winrepo",
+      "winrepo_name": "yandexbrowser",
       "chocolatey_name": "yandexbrowser",
       "installer_url": "",
       "installer_path": "C:\\Windows\\Temp\\yandex-browser-setup.exe",
@@ -40,7 +41,7 @@
       "repo": {
         "name": "",
         "disabled": false,
-        "comps": "",
+        "comps": "main",
         "conf_name": "yandex-browser",
         "key_file": "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG",
         "key_file_dearmor": true,
@@ -50,7 +51,8 @@
         "humanname": "Yandex Browser"
       },
       "windows": {
-        "method": "chocolatey",
+        "method": "winrepo",
+        "winrepo_name": "yandexbrowser",
         "chocolatey_name": "yandexbrowser",
         "installer_url": "",
         "installer_path": "C:\\Windows\\Temp\\yandex-browser-setup.exe",
@@ -60,15 +62,15 @@
     },
     "Debian": {
       "repo": {
-        "name": "deb http://repo.yandex.ru/yandex-browser/deb stable",
-        "comps": "main,contrib,non-free",
+        "name": "deb https://repo.yandex.ru/yandex-browser/deb stable main",
+        "comps": "main",
         "file": "/etc/apt/sources.list.d/yandex-browser.list",
         "humanname": "Yandex Browser"
       }
     },
     "RedHat": {
       "repo": {
-        "name": "https://repo.yandex.ru/yandex-browser/rpm/stable/$basearch/",
+        "name": "https://repo.yandex.ru/yandex-browser/alt/$basearch/",
         "key_file_dearmor": false,
         "key_keyrings_dir": "/etc/pki/rpm-gpg/",
         "required_packages": [],
@@ -82,7 +84,14 @@
     }
   },
   "windows": {
-    "method": "chocolatey",
-    "chocolatey_name": "yandexbrowser"
-  }
+    "method": "winrepo",
+    "winrepo_name": "yandexbrowser"
+  },
+  "notes": [
+    "Official apt: deb https://repo.yandex.ru/yandex-browser/deb stable main",
+    "Official key: https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG",
+    "ALT/RedHat default: https://repo.yandex.ru/yandex-browser/alt/$basearch/",
+    "Pillar lookup.repo can replace any repo URL with a corporate mirror",
+    "Windows default method: winrepo; chocolatey/installer via pillar"
+  ]
 }

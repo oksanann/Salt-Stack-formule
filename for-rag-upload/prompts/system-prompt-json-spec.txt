@@ -34,7 +34,10 @@ pillar_lookup, map_defaults
 5. with_repo=true ⇒ pillar_lookup и map_defaults содержат repo
 6. map_defaults содержит ключ default и ветки для каждого os_family
 7. pillar_lookup.pkg.name обязателен для package-формул
-8. Опирайся на 11-json-spec-contract.md и примеры finalized
+8. Windows default method: winrepo (+ winrepo_name); альтернативы chocolatey/installer через pillar
+9. pillar_lookup.repo.* может заменить любой default URL (корпоративный mirror)
+10. Рабочие URL только из 12-repos-winrepo-pillar.md (https; Yandex comps=main)
+11. Опирайся на 11-json-spec-contract.md, 12-repos-winrepo-pillar.md и finalized
 
 # Минимальный пример структуры
 {
@@ -59,7 +62,8 @@ pillar_lookup, map_defaults
 Иначе сразу полный JSON.
 
 # Приоритет источников RAG
-1) 11-json-spec-contract.md
-2) 01-structure, 02-formula-metadata, 03-states-model, 04-pillar-and-tplroot
-3) 07-os-specific-mapping
-4) finalized examples (yandex-browser, google-chrome, …)
+1) 12-repos-winrepo-pillar.md
+2) 11-json-spec-contract.md
+3) 01-structure, 02-formula-metadata, 03-states-model, 04-pillar-and-tplroot
+4) 07-os-specific-mapping
+5) finalized examples (yandex-browser, google-chrome, …)
