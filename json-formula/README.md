@@ -3,9 +3,10 @@
 Сюда сохраняются JSON-спецификации созданных формул.
 
 Пример:
-- `putty.json`
-- `yandex-browser.json`
-- `nginx.json`
+- `putty.json` — package
+- `yandex-browser.json` — package + repo
+- `nginx.json` — package
+- `security-baseline.json` — `formula_kind: security-baseline`
 
 Сборка формулы из JSON:
 

@@ -1,0 +1,177 @@
+{
+  "name": "security-baseline",
+  "top_level_dir": "security-baseline",
+  "formula_kind": "security-baseline",
+  "os": ["linux"],
+  "os_family": ["Debian", "RedHat"],
+  "summary": "Linux security baseline policy and compliance checks",
+  "description": "Applies a configurable Linux security baseline: SSH hardening via sshd drop-in, kernel sysctl hardening, unwanted services lockdown, and optional security packages. Provides check states for compliance drift detection and clean states for rollback.",
+  "with_repo": false,
+  "release": 1,
+  "pillar_lookup": {
+    "enable_ssh": true,
+    "enable_sysctl": true,
+    "enable_services": true,
+    "enable_packages": true,
+    "ssh": {
+      "config_path": "/etc/ssh/sshd_config.d/99-security-baseline.conf",
+      "service": "ssh",
+      "permit_root_login": "no",
+      "password_authentication": "no",
+      "pubkey_authentication": "yes",
+      "challenge_response_authentication": "no",
+      "use_pam": "yes",
+      "x11_forwarding": "no",
+      "max_auth_tries": 3,
+      "client_alive_interval": 300,
+      "client_alive_count_max": 2,
+      "allow_users": [],
+      "allow_groups": [],
+      "protocol": 2
+    },
+    "sysctl": {
+      "config_path": "/etc/sysctl.d/99-security-baseline.conf",
+      "params": {
+        "net.ipv4.ip_forward": 0,
+        "net.ipv4.conf.all.accept_redirects": 0,
+        "net.ipv4.conf.default.accept_redirects": 0,
+        "net.ipv4.conf.all.send_redirects": 0,
+        "net.ipv4.conf.default.send_redirects": 0,
+        "net.ipv4.conf.all.accept_source_route": 0,
+        "net.ipv4.conf.default.accept_source_route": 0,
+        "net.ipv4.conf.all.log_martians": 1,
+        "net.ipv4.icmp_echo_ignore_broadcasts": 1,
+        "net.ipv4.tcp_syncookies": 1,
+        "net.ipv6.conf.all.accept_redirects": 0,
+        "net.ipv6.conf.default.accept_redirects": 0,
+        "kernel.randomize_va_space": 2,
+        "fs.suid_dumpable": 0
+      }
+    },
+    "services": {
+      "disabled": [
+        "telnet.socket",
+        "telnet",
+        "rsh.socket",
+        "rlogin.socket",
+        "rexec.socket",
+        "nfs-server",
+        "rpcbind",
+        "avahi-daemon",
+        "cups",
+        "bluetooth"
+      ],
+      "restore_on_clean": []
+    },
+    "packages": {
+      "required": [],
+      "forbidden": [
+        "telnet",
+        "rsh-client",
+        "rsh-redone-client",
+        "talk",
+        "xinetd"
+      ]
+    }
+  },
+  "map_defaults": {
+    "default": {
+      "enable_ssh": true,
+      "enable_sysctl": true,
+      "enable_services": true,
+      "enable_packages": true,
+      "ssh": {
+        "config_path": "/etc/ssh/sshd_config.d/99-security-baseline.conf",
+        "service": "ssh",
+        "permit_root_login": "no",
+        "password_authentication": "no",
+        "pubkey_authentication": "yes",
+        "challenge_response_authentication": "no",
+        "use_pam": "yes",
+        "x11_forwarding": "no",
+        "max_auth_tries": 3,
+        "client_alive_interval": 300,
+        "client_alive_count_max": 2,
+        "allow_users": [],
+        "allow_groups": [],
+        "protocol": 2
+      },
+      "sysctl": {
+        "config_path": "/etc/sysctl.d/99-security-baseline.conf",
+        "params": {
+          "net.ipv4.ip_forward": 0,
+          "net.ipv4.conf.all.accept_redirects": 0,
+          "net.ipv4.conf.default.accept_redirects": 0,
+          "net.ipv4.conf.all.send_redirects": 0,
+          "net.ipv4.conf.default.send_redirects": 0,
+          "net.ipv4.conf.all.accept_source_route": 0,
+          "net.ipv4.conf.default.accept_source_route": 0,
+          "net.ipv4.conf.all.log_martians": 1,
+          "net.ipv4.icmp_echo_ignore_broadcasts": 1,
+          "net.ipv4.tcp_syncookies": 1,
+          "net.ipv6.conf.all.accept_redirects": 0,
+          "net.ipv6.conf.default.accept_redirects": 0,
+          "kernel.randomize_va_space": 2,
+          "fs.suid_dumpable": 0
+        }
+      },
+      "services": {
+        "disabled": [
+          "telnet.socket",
+          "telnet",
+          "rsh.socket",
+          "rlogin.socket",
+          "rexec.socket",
+          "nfs-server",
+          "rpcbind",
+          "avahi-daemon",
+          "cups",
+          "bluetooth"
+        ],
+        "restore_on_clean": []
+      },
+      "packages": {
+        "required": [],
+        "forbidden": [
+          "telnet",
+          "rsh-client",
+          "rsh-redone-client",
+          "talk",
+          "xinetd"
+        ]
+      }
+    },
+    "Debian": {
+      "ssh": {
+        "service": "ssh"
+      },
+      "packages": {
+        "forbidden": [
+          "telnet",
+          "rsh-client",
+          "rsh-redone-client",
+          "talk",
+          "xinetd"
+        ]
+      }
+    },
+    "RedHat": {
+      "ssh": {
+        "service": "sshd"
+      },
+      "packages": {
+        "forbidden": [
+          "telnet",
+          "rsh",
+          "talk",
+          "xinetd"
+        ]
+      }
+    }
+  },
+  "notes": [
+    "formula_kind=security-baseline: ssh/sysctl/services/packages + check/clean",
+    "with_repo ignored for this kind",
+    "Before PasswordAuthentication=no ensure SSH keys work on the host"
+  ]
+}

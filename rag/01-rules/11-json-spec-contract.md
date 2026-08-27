@@ -44,10 +44,20 @@ chunk: none
 
 | Поле | Тип | Описание |
 |------|-----|----------|
+| `formula_kind` | string | `package` (default) или `security-baseline` |
 | `release` | number | По умолчанию 1 |
 | `package_state` | string | `pkg` (default) |
 | `windows` | object | `method` (`winrepo`\|`chocolatey`\|`installer`), `winrepo_name`, … |
 | `notes` | string[] | Подсказки (не пишутся в формулу) |
+
+## formula_kind
+
+| Значение | Что рендерит |
+|----------|--------------|
+| `package` | package (+ repository при `with_repo`) — установка ПО |
+| `security-baseline` | ssh / sysctl / services / packages + check/clean — политика безопасности Linux |
+
+Для `security-baseline`: `with_repo` игнорируется; в `pillar_lookup` / `map_defaults` нужны toggles и блоки `ssh`, `sysctl`, `services`, `packages` (см. `json-formula/security-baseline.json`).
 
 ## Pillar override репозитория
 
