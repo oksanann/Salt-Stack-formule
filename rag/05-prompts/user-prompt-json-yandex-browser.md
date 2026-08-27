@@ -18,4 +18,4 @@
 1) одно предложение
 2) блок ```json
 3) команда:
-   ./tools/render_formula.sh --spec ./yandex-browser.json --out ./dist
+   ./rag/tools/render_formula.sh --spec ./json-formula/yandex-browser.json --out ./dist

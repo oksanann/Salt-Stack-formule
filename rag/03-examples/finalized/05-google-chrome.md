@@ -27,14 +27,20 @@ google-chrome:
       version: ''
       fromrepo: ''
     repo:
-      name: 'deb http://dl.google.com/linux/chrome/deb/ stable main'
+      # Рабочий URL (https). Можно заменить на корпоративный mirror через pillar.
+      name: 'deb https://dl.google.com/linux/chrome/deb/ stable main'
       disabled: False
-      comps: ''
+      comps: 'main'
       conf_name: 'google-chrome'
       key_file: 'https://dl.google.com/linux/linux_signing_key.pub'
       key_file_dearmor: True
       key_keyrings_dir: '/etc/apt/keyrings/'
       required_packages: [ 'gpg' ]
+      file: '/etc/apt/sources.list.d/google-chrome.list'
+      humanname: 'Google Chrome'
+    windows:
+      method: winrepo
+      winrepo_name: googlechrome
 ```
 
 ## Паттерн

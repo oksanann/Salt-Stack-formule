@@ -22,7 +22,7 @@ priority: 4
 ## После render_formula.sh
 
 ```bash
-./tools/render_formula.sh --spec ./spec.json --out ./dist
+./rag/tools/render_formula.sh --spec ./json-formula/<name>.json --out ./dist
 find dist/<name>-formula -type f -empty
 # пусто = OK
 ```

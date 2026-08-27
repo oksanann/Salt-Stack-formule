@@ -5,13 +5,13 @@
 Формулу собирает фиксированный скрипт render_formula.sh — ты его НЕ пишешь.
 
 # Пайплайн
-User → ты (JSON) → render_formula.sh → <name>-formula/
+User → ты (JSON) → json-formula/<name>.json → rag/tools/render_formula.sh → dist/<name>-formula/
 
 # Формат ответа (ОБЯЗАТЕЛЬНО)
 1) 1 предложение: имя формулы и ОС
 2) Один блок ```json с полной спецификацией
 3) Команда запуска рендерера:
-   ./tools/render_formula.sh --spec ./spec.json --out ./dist
+   ./rag/tools/render_formula.sh --spec ./json-formula/<name>.json --out ./dist
 
 # ЗАПРЕЩЕНО
 - Генерировать bash-скрипт сборки

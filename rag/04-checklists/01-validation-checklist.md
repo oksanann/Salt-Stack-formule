@@ -15,7 +15,7 @@ priority: 4
 
 - [ ] ИИ вернул **только JSON** (не bash/Python и не список файлов)
 - [ ] JSON валиден: `jq empty spec.json`
-- [ ] Формула собрана: `./tools/render_formula.sh --spec ./spec.json --out ./dist`
+- [ ] Формула собрана: `./rag/tools/render_formula.sh --spec ./json-formula/<name>.json --out ./dist`
 - [ ] Нет пустых файлов: `find <name>-formula -type f -empty` без вывода
 
 ## Структура

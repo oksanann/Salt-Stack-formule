@@ -35,7 +35,7 @@ User → LLM (JSON only) → spec.json → render_formula.sh → <name>-formula/
 - One short sentence.
 - One ```json block only.
 - Render command:
-  `./tools/render_formula.sh --spec ./spec.json --out ./dist`
+  `./rag/tools/render_formula.sh --spec ./json-formula/<name>.json --out ./dist`
 
 ## Step 5: user renders
 - Save JSON as UTF-8 text (`jq empty spec.json`).

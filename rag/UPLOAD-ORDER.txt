@@ -1,0 +1,50 @@
+# Upload order for RAG indexing
+# Load files top-to-bottom. Path relative to rag/
+
+# === BLOCK 1: RULES (priority 1) ===
+01-rules/01-structure.md
+01-rules/02-formula-metadata.md
+01-rules/03-states-model.md
+01-rules/04-pillar-and-tplroot.md
+01-rules/05-secrets.md
+01-rules/07-os-specific-mapping.md
+01-rules/08-bash-generator-contract.md
+01-rules/09-output-format-policy.md
+01-rules/10-bash-generator-reference.md
+01-rules/11-json-spec-contract.md
+01-rules/12-repos-winrepo-pillar.md
+01-rules/06-python-builder-output.md
+
+# === BLOCK 2: TEMPLATES (priority 2) ===
+02-templates/00-overview.md
+02-templates/01-state-id-naming.md
+02-templates/02-linux-windows.md
+
+# === BLOCK 3: EXAMPLES (priority 3) ===
+03-examples/finalized/00-overview.md
+03-examples/finalized/01-pattern-package-repo.md
+03-examples/finalized/07-yandex-browser.md
+03-examples/finalized/05-google-chrome.md
+03-examples/finalized/06-google-chrome-reboot.md
+03-examples/finalized/02-agent-update.md
+03-examples/finalized/03-get-hostname.md
+03-examples/finalized/04-file-find.md
+03-examples/finalized/08-pattern-remote-access.md
+03-examples/finalized/09-remote-access-groups-xrdp.md
+03-examples/finalized/10-remote-access-groups-tigervnc.md
+03-examples/01-tpl-script.md
+03-examples/02-tpl-group-members.md
+03-examples/03-tpl-shortcut.md
+03-examples/04-remote-access-groups-ssh.md
+
+# === BLOCK 4: CHECKLISTS (priority 4) ===
+04-checklists/01-validation-checklist.md
+04-checklists/02-anti-patterns.md
+04-checklists/03-generation-flow.md
+04-checklists/04-preflight-inputs.md
+04-checklists/05-postgen-smoke-test.md
+04-checklists/06-json-quality-gates.md
+
+# === NOT FOR RAG (system/user prompts) ===
+# 05-prompts/system-prompt-json-spec.txt
+# 05-prompts/user-prompt-json-yandex-browser.md
