@@ -37,11 +37,22 @@ priority: 2
 
 ```jinja
 {%- if grains['os_family'] == 'Windows' %}
-# Windows states: win_*, file.managed с Windows-путями, powershell
+{# Windows: prefer winrepo (pkg.installed), else chocolatey / installer #}
 {%- else %}
 # Linux states: pkg.*, file.*, cmd.script с /bin/sh
 {%- endif %}
 ```
+
+## Windows methods
+
+| method | Модуль | Когда |
+|--------|--------|-------|
+| `winrepo` | `pkg.installed` | Default в Осмакс/Salt winrepo |
+| `chocolatey` | `chocolatey.installed` | Через pillar |
+| `installer` | `file.managed` + `cmd.run` | Прямой MSI/EXE URL |
+
+Pillar может переопределить `repo.*` на Linux и `windows.method` на Windows.
+См. `12-repos-winrepo-pillar.md`.
 
 ## Запрещено
 

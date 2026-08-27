@@ -12,6 +12,7 @@ documents/01-rules/08-bash-generator-contract.md
 documents/01-rules/09-output-format-policy.md
 documents/01-rules/10-bash-generator-reference.md
 documents/01-rules/11-json-spec-contract.md
+documents/01-rules/12-repos-winrepo-pillar.md
 documents/01-rules/06-python-builder-output.md
 
 # === BLOCK 2: TEMPLATES (priority 2) ===

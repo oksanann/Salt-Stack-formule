@@ -6,7 +6,8 @@
 {%- if grains['os_family'] == 'Windows' %}
 
 {%- set win = cfg.get('windows', {}) %}
-{%- set win_method = win.get('method', 'chocolatey') %}
+{%- set win_method = win.get('method', 'winrepo') %}
+{%- set winrepo_name = win.get('winrepo_name', cfg.pkg.name) %}
 {%- set choco_name = win.get('chocolatey_name', cfg.pkg.name) %}
 {%- set pkg_version = cfg.pkg.get('version', '') %}
 
@@ -25,11 +26,21 @@ yandex-browser-package-cmd-run-installer:
     - require:
       - file: yandex-browser-package-file-managed-installer
 
-{%- else %}
+{%- elif win_method == 'chocolatey' %}
 
 yandex-browser-package-chocolatey-installed:
   chocolatey.installed:
     - name: {{ choco_name }}
+{%- if pkg_version %}
+    - version: '{{ pkg_version }}'
+{%- endif %}
+
+{%- else %}
+
+{# Default / winrepo: Salt Windows Software Repository #}
+yandex-browser-package-winrepo-pkg-installed:
+  pkg.installed:
+    - name: {{ winrepo_name }}
 {%- if pkg_version %}
     - version: '{{ pkg_version }}'
 {%- endif %}

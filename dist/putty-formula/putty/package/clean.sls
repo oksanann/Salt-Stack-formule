@@ -6,7 +6,8 @@
 {%- if grains['os_family'] == 'Windows' %}
 
 {%- set win = cfg.get('windows', {}) %}
-{%- set win_method = win.get('method', 'chocolatey') %}
+{%- set win_method = win.get('method', 'winrepo') %}
+{%- set winrepo_name = win.get('winrepo_name', cfg.pkg.name) %}
 {%- set choco_name = win.get('chocolatey_name', cfg.pkg.name) %}
 
 {%- if win_method == 'chocolatey' %}
@@ -17,9 +18,10 @@ putty-package-chocolatey-uninstalled:
 
 {%- else %}
 
-putty-package-pkg-removed-windows:
+{# winrepo or installer cleanup via pkg.removed #}
+putty-package-winrepo-pkg-removed:
   pkg.removed:
-    - name: {{ cfg.pkg.name }}
+    - name: {{ winrepo_name }}
 
 {%- endif %}
 

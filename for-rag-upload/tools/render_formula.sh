@@ -176,7 +176,8 @@ write_file "${TOP}/package/init.sls" <<EOF
 {%- if grains['os_family'] == 'Windows' %}
 
 {%- set win = cfg.get('windows', {}) %}
-{%- set win_method = win.get('method', 'chocolatey') %}
+{%- set win_method = win.get('method', 'winrepo') %}
+{%- set winrepo_name = win.get('winrepo_name', cfg.pkg.name) %}
 {%- set choco_name = win.get('chocolatey_name', cfg.pkg.name) %}
 {%- set pkg_version = cfg.pkg.get('version', '') %}
 
@@ -195,11 +196,21 @@ ${NAME}-package-cmd-run-installer:
     - require:
       - file: ${NAME}-package-file-managed-installer
 
-{%- else %}
+{%- elif win_method == 'chocolatey' %}
 
 ${NAME}-package-chocolatey-installed:
   chocolatey.installed:
     - name: {{ choco_name }}
+{%- if pkg_version %}
+    - version: '{{ pkg_version }}'
+{%- endif %}
+
+{%- else %}
+
+{# Default / winrepo: Salt Windows Software Repository #}
+${NAME}-package-winrepo-pkg-installed:
+  pkg.installed:
+    - name: {{ winrepo_name }}
 {%- if pkg_version %}
     - version: '{{ pkg_version }}'
 {%- endif %}
@@ -234,7 +245,8 @@ write_file "${TOP}/package/clean.sls" <<EOF
 {%- if grains['os_family'] == 'Windows' %}
 
 {%- set win = cfg.get('windows', {}) %}
-{%- set win_method = win.get('method', 'chocolatey') %}
+{%- set win_method = win.get('method', 'winrepo') %}
+{%- set winrepo_name = win.get('winrepo_name', cfg.pkg.name) %}
 {%- set choco_name = win.get('chocolatey_name', cfg.pkg.name) %}
 
 {%- if win_method == 'chocolatey' %}
@@ -245,9 +257,10 @@ ${NAME}-package-chocolatey-uninstalled:
 
 {%- else %}
 
-${NAME}-package-pkg-removed-windows:
+{# winrepo or installer cleanup via pkg.removed #}
+${NAME}-package-winrepo-pkg-removed:
   pkg.removed:
-    - name: {{ cfg.pkg.name }}
+    - name: {{ winrepo_name }}
 
 {%- endif %}
 

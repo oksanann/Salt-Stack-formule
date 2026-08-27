@@ -46,8 +46,20 @@ chunk: none
 |------|-----|----------|
 | `release` | number | По умолчанию 1 |
 | `package_state` | string | `pkg` (default) |
-| `windows` | object | `method`, `chocolatey_name`, `installer_url`, … |
+| `windows` | object | `method` (`winrepo`\|`chocolatey`\|`installer`), `winrepo_name`, … |
 | `notes` | string[] | Подсказки (не пишутся в формулу) |
+
+## Pillar override репозитория
+
+`pillar_lookup.repo.*` **может полностью заменить** defaults из `map_defaults` (корпоративный mirror, ALT URL, offline).  
+Пустой `repo.name` = не импортировать внешний repo.
+
+## Windows method
+
+Default: **`winrepo`** (`pkg.installed` через Salt winrepo).  
+Альтернативы через pillar: `chocolatey`, `installer`.
+
+См. `12-repos-winrepo-pillar.md`.
 
 ## Минимальный пример (nginx, без repo)
 
@@ -96,9 +108,9 @@ chunk: none
       "fromrepo": "stable"
     },
     "repo": {
-      "name": "deb http://repo.yandex.ru/yandex-browser/deb stable",
+      "name": "deb https://repo.yandex.ru/yandex-browser/deb stable main",
       "disabled": false,
-      "comps": "main,contrib,non-free",
+      "comps": "main",
       "conf_name": "yandex-browser",
       "key_file": "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG",
       "key_file_dearmor": true,
@@ -106,7 +118,8 @@ chunk: none
       "required_packages": ["gpg"]
     },
     "windows": {
-      "method": "chocolatey",
+      "method": "winrepo",
+      "winrepo_name": "yandexbrowser",
       "chocolatey_name": "yandexbrowser",
       "installer_url": "",
       "installer_path": "C:\\\\Windows\\\\Temp\\\\yandex-browser-setup.exe",
@@ -120,7 +133,7 @@ chunk: none
       "repo": {
         "name": "",
         "disabled": false,
-        "comps": "",
+        "comps": "main",
         "conf_name": "yandex-browser",
         "key_file": "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG",
         "key_file_dearmor": true,
@@ -130,25 +143,22 @@ chunk: none
         "humanname": "Yandex Browser"
       },
       "windows": {
-        "method": "chocolatey",
-        "chocolatey_name": "yandexbrowser",
-        "installer_url": "",
-        "installer_path": "C:\\\\Windows\\\\Temp\\\\yandex-browser-setup.exe",
-        "install_args": "/silent /install",
-        "uninstall_name": "Yandex"
+        "method": "winrepo",
+        "winrepo_name": "yandexbrowser",
+        "chocolatey_name": "yandexbrowser"
       }
     },
     "Debian": {
       "repo": {
-        "name": "deb http://repo.yandex.ru/yandex-browser/deb stable",
-        "comps": "main,contrib,non-free",
+        "name": "deb https://repo.yandex.ru/yandex-browser/deb stable main",
+        "comps": "main",
         "file": "/etc/apt/sources.list.d/yandex-browser.list",
         "humanname": "Yandex Browser"
       }
     },
     "RedHat": {
       "repo": {
-        "name": "https://repo.yandex.ru/yandex-browser/rpm/stable/$basearch/",
+        "name": "https://repo.yandex.ru/yandex-browser/alt/$basearch/",
         "key_file_dearmor": false,
         "key_keyrings_dir": "/etc/pki/rpm-gpg/",
         "required_packages": [],
@@ -162,8 +172,8 @@ chunk: none
     }
   },
   "windows": {
-    "method": "chocolatey",
-    "chocolatey_name": "yandexbrowser"
+    "method": "winrepo",
+    "winrepo_name": "yandexbrowser"
   }
 }
 ```
