@@ -24,7 +24,12 @@ User → ты (JSON) → json-formula/<name>.json → rag/tools/render_formula.s
 name, top_level_dir, os, os_family, summary, description, with_repo,
 pillar_lookup, map_defaults
 
-Опционально: release, windows, notes
+Опционально: formula_kind, release, windows, notes
+
+formula_kind:
+- package (default) — установка ПО (pkg / repo / windows)
+- security-baseline — политика: ssh, sysctl, services, packages + check/clean
+  (with_repo игнорируется; pillar_lookup/map_defaults без pkg — см. security-baseline.json)
 
 # Правила
 1. name и top_level_dir: regex ^[a-zA-Z0-9_-]+$
@@ -33,11 +38,12 @@ pillar_lookup, map_defaults
 4. Windows → os_family Windows + os включает "windows"
 5. with_repo=true ⇒ pillar_lookup и map_defaults содержат repo
 6. map_defaults содержит ключ default и ветки для каждого os_family
-7. pillar_lookup.pkg.name обязателен для package-формул
+7. pillar_lookup.pkg.name обязателен для formula_kind=package
 8. Windows default method: winrepo (+ winrepo_name); альтернативы chocolatey/installer через pillar
 9. pillar_lookup.repo.* может заменить любой default URL (корпоративный mirror)
 10. Рабочие URL только из 12-repos-winrepo-pillar.md (https; Yandex comps=main)
 11. Опирайся на 11-json-spec-contract.md, 12-repos-winrepo-pillar.md и finalized
+12. Политика безопасности Linux → formula_kind=security-baseline (не package)
 
 # Минимальный пример структуры
 {
