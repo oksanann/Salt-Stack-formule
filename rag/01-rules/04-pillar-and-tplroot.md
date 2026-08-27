@@ -96,3 +96,40 @@ file_find:
 ```
 
 Ключ merge: `<formula-name>:lookup`.
+
+## Переопределение репозитория через pillar
+
+Администратор **может передать другой репозиторий** в `lookup.repo` — без правки SLS и map.jinja.
+
+```yaml
+yandex-browser:
+  lookup:
+    repo:
+      name: 'deb https://mirror.company.local/yandex-browser/deb stable main'
+      key_file: 'https://mirror.company.local/yandex-browser/YANDEX-BROWSER-KEY.GPG'
+      comps: 'main'
+      conf_name: 'yandex-browser'
+      key_file_dearmor: True
+      key_keyrings_dir: '/etc/apt/keyrings/'
+      required_packages: [ 'gpg' ]
+      file: '/etc/apt/sources.list.d/yandex-browser.list'
+```
+
+Правила:
+
+1. Значения из `lookup` **перекрывают** defaults `map.jinja` (merge).
+2. Пустой `repo.name: ''` — внешний repo не импортируется.
+3. Для ALT можно подменить RPM URL на `https://repo.yandex.ru/yandex-browser/alt/$basearch/`.
+4. `pillar.example` обязан документировать переопределяемые `repo.*`.
+
+Подробности и рабочие URL: `12-repos-winrepo-pillar.md`.
+
+## Windows: method через pillar
+
+```yaml
+my-app:
+  lookup:
+    windows:
+      method: winrepo   # winrepo | chocolatey | installer
+      winrepo_name: my-app
+```

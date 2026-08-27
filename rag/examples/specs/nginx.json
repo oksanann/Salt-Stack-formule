@@ -1,0 +1,23 @@
+{
+  "name": "nginx",
+  "top_level_dir": "nginx",
+  "os": ["linux"],
+  "os_family": ["Debian", "RedHat"],
+  "summary": "Install nginx",
+  "description": "Install nginx package on Linux",
+  "with_repo": false,
+  "release": 1,
+  "pillar_lookup": {
+    "pkg": {
+      "name": "nginx",
+      "version": ""
+    }
+  },
+  "map_defaults": {
+    "default": {
+      "pkg": {"name": "nginx", "version": ""}
+    },
+    "Debian": {},
+    "RedHat": {}
+  }
+}

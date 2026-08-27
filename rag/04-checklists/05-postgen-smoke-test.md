@@ -10,7 +10,7 @@ priority: 4
 Run **after** `render_formula.sh` (not after inventing files by hand).
 
 ```bash
-./tools/render_formula.sh --spec ./spec.json --out ./dist
+./rag/tools/render_formula.sh --spec ./json-formula/<name>.json --out ./dist
 find ./dist/<name>-formula -type f -empty   # must be empty output
 jq empty ./spec.json
 ```

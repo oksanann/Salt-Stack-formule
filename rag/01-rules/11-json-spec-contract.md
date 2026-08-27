@@ -192,7 +192,7 @@ Default: **`winrepo`** (`pkg.installed` через Salt winrepo).
 ```bash
 # Сохранить ответ ИИ в файл
 # затем:
-./tools/render_formula.sh --spec ./spec.json --out ./dist
+./rag/tools/render_formula.sh --spec ./json-formula/<name>.json --out ./dist
 ```
 
 ## Что делает рендерер (не ИИ)

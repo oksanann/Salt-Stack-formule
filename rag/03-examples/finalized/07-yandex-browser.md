@@ -19,24 +19,47 @@ Clean: `yandex-browser.clean`, `.package.clean`, `.repository.clean`, `.reposito
 
 ## pillar.example
 
+Рабочие официальные URL (https, comps=`main`). Через pillar можно подменить `repo.*` на корпоративный mirror.
+
 ```yaml
 yandex-browser:
   lookup:
     pkg:
       name: yandex-browser-stable
-      version: '23.5.4.685-1'
+      version: ''
       fromrepo: 'stable'
     repo:
-      name: 'deb http://repo.yandex.ru/yandex-browser/deb stable'
+      # Default (Astra/Debian). Можно заменить на mirror.
+      name: 'deb https://repo.yandex.ru/yandex-browser/deb stable main'
       disabled: False
-      comps: 'main,contrib,non-free'
+      comps: 'main'
       conf_name: 'yandex-browser'
       key_file: 'https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG'
       key_file_dearmor: True
       key_keyrings_dir: '/etc/apt/keyrings/'
       required_packages: [ 'gpg' ]
+      file: '/etc/apt/sources.list.d/yandex-browser.list'
+      humanname: 'Yandex Browser'
+    windows:
+      method: winrepo
+      winrepo_name: yandexbrowser
+      chocolatey_name: yandexbrowser
+```
+
+Для ALT (RedHat family) в map/pillar используйте:
+
+```yaml
+repo:
+  name: 'https://repo.yandex.ru/yandex-browser/alt/$basearch/'
+```
+
+или RPM:
+
+```yaml
+repo:
+  name: 'https://repo.yandex.ru/yandex-browser/rpm/stable/$basearch/'
 ```
 
 ## Паттерн
 
-Тот же package+repository, что у google-chrome. Отличия — имена пакета/repo/key и `comps`.
+Тот же package+repository, что у google-chrome. Windows — `winrepo` (или chocolatey через pillar).
