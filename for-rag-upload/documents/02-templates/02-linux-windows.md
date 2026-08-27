@@ -43,7 +43,9 @@ priority: 2
 {%- endif %}
 ```
 
-## Windows methods
+Для скриптов/маркеров берите пути из `mapdata` (`marker_path`, `shell`), а не хардкодьте Linux-пути в SLS.
+
+## Windows methods (package formulas)
 
 | method | Модуль | Когда |
 |--------|--------|-------|
@@ -59,6 +61,7 @@ Pillar может переопределить `repo.*` на Linux и `windows.m
 - Linux-команды (`test -f`, `bash`) в ветке Windows.
 - POSIX-пути в ветке Windows без адаптации.
 - Один и тот же `shell` для обеих платформ без override в map.jinja.
+- Default Windows method `chocolatey`, если правила требуют `winrepo` (если пользователь явно не просил chocolatey).
 
 ## FORMULA.os / os_family
 

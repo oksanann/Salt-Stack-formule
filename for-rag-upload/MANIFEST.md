@@ -39,6 +39,7 @@
 | documents/04-checklists/03-generation-flow.md | salt-formula-checklist | 4 | whole |
 | documents/04-checklists/04-preflight-inputs.md | salt-formula-checklist | 4 | whole |
 | documents/04-checklists/05-postgen-smoke-test.md | salt-formula-checklist | 4 | whole |
+| documents/04-checklists/06-json-quality-gates.md | salt-formula-checklist | 4 | whole |
 
 ## Промпты (НЕ в RAG)
 

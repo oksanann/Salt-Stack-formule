@@ -8,59 +8,71 @@ priority: 4
 
 # Чеклист проверки сгенерированной формулы
 
-Используйте после генерации формулы ИИ. Если пункт не выполнен — формула не готова.
+Используйте после пайплайна: **ИИ → JSON → `render_formula.sh` → формула**.  
+Если пункт не выполнен — формула не готова.
 
-## Python-сборщик (формат ответа ИИ)
+## Пайплайн (текущая реализация)
 
-- [ ] Ответ содержит один `.py` скрипт, а не список файлов для ручного копирования
-- [ ] Скрипт запускается: `python3 build_*_formula.py [--out DIR]`
-- [ ] Создаётся `<name>-formula/<name>/...`
-- [ ] Только stdlib (`pathlib`, `argparse`), без network/shell
-- [ ] После запуска есть `init.sls`, `clean.sls`, `FORMULA`, `pillar.example`
+- [ ] ИИ вернул **только JSON** (не bash/Python и не список файлов)
+- [ ] JSON валиден: `jq empty spec.json`
+- [ ] Формула собрана: `./tools/render_formula.sh --spec ./spec.json --out ./dist`
+- [ ] Нет пустых файлов: `find <name>-formula -type f -empty` без вывода
 
 ## Структура
 
 - [ ] Корень называется `<top_level_dir>-formula`
 - [ ] Есть поддиректория `<top_level_dir>`
-- [ ] Есть `init.sls`
-- [ ] Есть `clean.sls`
-- [ ] Есть `pillar.example`
-- [ ] Есть `FORMULA`
-- [ ] Имена файлов/директорий соответствуют `[a-zA-Z0-9-_]+` (точки только в `.sls`)
+- [ ] Есть `init.sls`, `clean.sls`, `pillar.example`, `FORMULA`
+- [ ] Рекомендуется: `map.jinja`, `docs/README.RST`
+- [ ] При `with_repo=true`: есть `repository/` (init/install/clean + key при необходимости)
+- [ ] При `with_repo=false`: каталога `repository/` нет
+- [ ] Имена файлов/директорий: `[a-zA-Z0-9-_]+` (точки только в `.sls`)
 
 ## FORMULA
 
 - [ ] `name` уникален
-- [ ] `os` и `os_family` заполнены и соответствуют реальной поддержке
+- [ ] `os` и `os_family` соответствуют реальной поддержке
+- [ ] Astra → Debian, ALT → RedHat отражены в `os_family`
 - [ ] `version` в формате `YYYYMM`
-- [ ] `release` указан
-- [ ] `summary`, `description`, `top_level_dir` заполнены
+- [ ] `release`, `summary`, `description`, `top_level_dir` заполнены
 - [ ] `top_level_dir` == имя поддиректории с SLS
 
 ## SLS / Jinja
 
 - [ ] В каждом `.sls` есть `tplroot = tpldir.split('/')[0]`
-- [ ] Параметры берутся из `map.jinja`
-- [ ] `map.jinja` делает `merge=salt['pillar.get']('<name>:lookup')`
-- [ ] ID состояний уникальны и без точек
-- [ ] ID имеют префикс имени формулы
-- [ ] `init.sls` включает нужные состояния apply
-- [ ] `clean.sls` откатывает apply в обратном порядке
+- [ ] Параметры из `map.jinja` + `merge=pillar lookup`
+- [ ] ID состояний уникальны, без точек, с префиксом имени формулы
+- [ ] `init.sls` включает apply-путь; `clean.sls` — откат в обратном порядке
 
-## Pillar
+## Pillar / repo override
 
-- [ ] `pillar.example` отражает ключ `<formula-name>.lookup`
-- [ ] Секреты только в lookup
-- [ ] Секреты в скрипты передаются через `args`
+- [ ] `pillar.example` содержит `<formula-name>.lookup`
+- [ ] При внешнем repo: документированы переопределяемые `repo.*`
+- [ ] Можно задать другой repo/mirror через pillar (не только defaults map.jinja)
+- [ ] Пустой `repo.name` означает «не импортировать внешний repo»
+- [ ] URL в примерах — рабочие `https://` (см. `12-repos-winrepo-pillar.md`)
+- [ ] Секреты только в lookup; в скрипты — через `args`
 
-## Платформы
+## Windows
 
-- [ ] Linux-ветки не содержат Windows-команд и наоборот
-- [ ] Пути/shell для Windows заданы отдельно (если заявлена поддержка Windows)
-- [ ] FORMULA не заявляет ОС, которые формула не поддерживает
+- [ ] Если заявлена Windows — есть ветка в `map.jinja` / `windows.*` в lookup
+- [ ] Default method: **`winrepo`** (`pkg.installed` + `winrepo_name`)
+- [ ] Альтернативы `chocolatey` / `installer` только если явно запрошены
+- [ ] Clean удаляет тем же методом
+- [ ] Нет Linux-команд/путей в Windows-ветке
+
+## Выбор шаблона
+
+- [ ] Script → `tpl-script`; группы → `tpl-group-members`; ярлыки → `tpl-shortcut`
+- [ ] Package/repo → finalized pattern (`google-chrome` / `yandex-browser` / `agent-update`)
+- [ ] Не подогнана package-формула под `tpl-script`
 
 ## Идемпотентность и безопасность
 
-- [ ] Повторный apply безопасен (`unless`/`onlyif` или declarative state)
+- [ ] Повторный apply безопасен
 - [ ] Нет хардкода паролей
 - [ ] Нет деструктивных действий без явного требования
+
+## Legacy (не основной режим)
+
+Python/bash-сборщик от ИИ — только если явно выбран legacy. Предпочтение: JSON + `render_formula.sh`.

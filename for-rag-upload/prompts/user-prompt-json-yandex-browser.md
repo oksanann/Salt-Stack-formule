@@ -6,7 +6,7 @@
 - name: yandex-browser
 - ОС: Astra Linux, ALT Linux, Windows
 - with_repo: true
-- Windows: chocolatey (yandexbrowser)
+- Windows: winrepo (yandexbrowser); chocolatey/installer — только если явно нужно
 
 Требования:
 - Astra → Debian, ALT → RedHat
