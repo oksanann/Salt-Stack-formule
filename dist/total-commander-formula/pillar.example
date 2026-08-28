@@ -1,0 +1,3 @@
+total-commander:
+  # Override map.jinja defaults
+  lookup: {"pkg":{"name":"totalcommander","version":"","fromrepo":"total-commander"},"repo":{"name":"","disabled":false,"comps":"main","conf_name":"total-commander","key_file":"","key_file_dearmor":true,"key_keyrings_dir":"/etc/apt/keyrings/","required_packages":["gpg"],"file":"/etc/apt/sources.list.d/total-commander.list","humanname":"Total Commander"},"windows":{"method":"winrepo","winrepo_name":"totalcommander","chocolatey_name":"totalcommander","installer_url":"","installer_path":"C:\\Windows\\Temp\\totalcommander-setup.exe","install_args":"/S","uninstall_name":"Total Commander"}}

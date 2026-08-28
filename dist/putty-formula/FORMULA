@@ -9,5 +9,5 @@ os_family:
 version: 202608
 release: 1
 summary: "Установка PuTTY"
-description: "Формула установки PuTTY на Astra Linux (Debian), ALT Linux (RedHat) и Windows. Linux — пакет putty из штатных repo ОС; Windows — winrepo (или chocolatey/installer через pillar)."
+description: "Формула установки PuTTY на Astra Linux (Debian), ALT Linux (RedHat) и Windows. Linux — штатные repo ОС; Windows — winrepo (или chocolatey/installer через pillar)."
 top_level_dir: putty
