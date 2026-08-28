@@ -16,8 +16,10 @@
 
 | Файл | Назначение |
 |------|------------|
-| `05-prompts/system-prompt-json-spec.txt` | System message (рекомендуется) |
-| `05-prompts/user-prompt-json-yandex-browser.md` | User: Яндекс Браузер |
+| **`05-prompts/system-prompt-json-spec.txt`** | System message (единственный) |
+| `05-prompts/user-prompt-yandex-browser.md` | User: Яндекс Браузер |
+| `05-prompts/user-prompt-templates.md` | User: шаблоны запросов |
+| `05-prompts/user-prompt-short-template.md` | User: короткий шаблон |
 
 ## Пайплайн
 

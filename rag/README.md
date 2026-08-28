@@ -18,11 +18,14 @@
 
 ```text
 rag/
-├── 01-rules/          ← правила (приоритет 1)
+├── 01-rules/          ← правила JSON-first (приоритет 1, см. 00-overview.md)
 ├── 02-templates/      ← tpl-* и Linux/Windows
 ├── 03-examples/       ← few-shot примеры
 ├── 04-checklists/     ← валидация
-├── 05-prompts/        ← system/user prompts (не в similarity search)
+├── 05-prompts/        ← system/user prompts, только JSON-first (не в RAG)
+│   ├── README.md
+│   ├── system-prompt-json-spec.txt
+│   └── user-prompt-*.md
 ├── examples/specs/    ← эталонные JSON
 ├── tools/
 │   └── render_formula.sh

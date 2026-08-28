@@ -207,7 +207,18 @@ Default: **`winrepo`** (`pkg.installed` через Salt winrepo).
 
 ## Что делает рендерер (не ИИ)
 
+Зависит от `formula_kind` (default: `package`).
+
+### package
+
 - Создаёт `<name>-formula/`
 - Пишет FORMULA, pillar.example, map.jinja, init.sls, clean.sls
-- Пишет package (+ repository при with_repo)
+- Пишет `package/` (+ `repository/` при `with_repo=true`)
 - Self-check: файлы существуют и не пустые
+
+### security-baseline
+
+- Создаёт `<name>-formula/` с `check.sls`
+- Пишет `ssh/`, `sysctl/`, `services/`, `packages/` (+ check/clean)
+- Пишет `files/` (Jinja-шаблоны)
+- `with_repo` игнорируется

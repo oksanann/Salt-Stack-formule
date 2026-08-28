@@ -2,18 +2,16 @@
 # Load files top-to-bottom. Path relative to rag/
 
 # === BLOCK 1: RULES (priority 1) ===
+01-rules/00-overview.md
 01-rules/01-structure.md
 01-rules/02-formula-metadata.md
 01-rules/03-states-model.md
 01-rules/04-pillar-and-tplroot.md
 01-rules/05-secrets.md
 01-rules/07-os-specific-mapping.md
-01-rules/08-bash-generator-contract.md
-01-rules/09-output-format-policy.md
-01-rules/10-bash-generator-reference.md
+01-rules/09-json-output-policy.md
 01-rules/11-json-spec-contract.md
 01-rules/12-repos-winrepo-pillar.md
-01-rules/06-python-builder-output.md
 
 # === BLOCK 2: TEMPLATES (priority 2) ===
 02-templates/00-overview.md
@@ -45,6 +43,8 @@
 04-checklists/05-postgen-smoke-test.md
 04-checklists/06-json-quality-gates.md
 
-# === NOT FOR RAG (system/user prompts) ===
+# === NOT FOR RAG (JSON-first prompts only) ===
 # 05-prompts/system-prompt-json-spec.txt
-# 05-prompts/user-prompt-json-yandex-browser.md
+# 05-prompts/user-prompt-yandex-browser.md
+# 05-prompts/user-prompt-templates.md
+# 05-prompts/user-prompt-short-template.md

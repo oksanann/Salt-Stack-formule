@@ -4,7 +4,7 @@
   "os": ["linux", "windows"],
   "os_family": ["Debian", "RedHat", "Windows"],
   "summary": "Установка PuTTY",
-  "description": "Формула установки PuTTY на Astra Linux (Debian), ALT Linux (RedHat) и Windows. Linux — штатные repo ОС; Windows — winrepo (или chocolatey/installer через pillar).",
+  "description": "Формула установки PuTTY на Astra Linux (Debian), ALT Linux (RedHat) и Windows. Linux — пакет putty из штатных repo ОС; Windows — winrepo (или chocolatey/installer через pillar).",
   "with_repo": false,
   "release": 1,
   "pillar_lookup": {
@@ -63,7 +63,8 @@
     "winrepo_name": "putty"
   },
   "notes": [
-    "with_repo=false: package from OS default repos",
-    "Windows default: winrepo; override method via pillar lookup.windows"
+    "with_repo=false: Linux installs from OS default repositories",
+    "Astra → Debian, ALT → RedHat",
+    "Windows default: winrepo; override via pillar lookup.windows"
   ]
 }

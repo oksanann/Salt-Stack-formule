@@ -1,25 +1,26 @@
 ---
 product: osmax
 doc_type: salt-formula-rules
-title: OS-specific mapping for Salt formulas
+title: Маппинг ОС для JSON-спеки и рендерера
 priority: 1
 ---
 
-# OS-specific mapping for Salt formulas
+# Маппинг ОС (JSON spec + render_formula.sh)
 
-## Goal
-Define deterministic branching rules for Linux and Windows when generating formula files and states.
+## Цель
 
-## Supported families
+Единые правила ветвления для Linux и Windows при заполнении JSON (`os`, `os_family`, `map_defaults`) и при сборке формулы.
+
+## Поддерживаемые семейства
 - `Debian`: includes Astra Linux branch.
 - `RedHat`: includes ALT Linux RPM branch.
 - `Windows`: native Windows branch.
 
 ## Mapping rules
-1. If user requests Astra Linux, generator must include `Debian` in `os_family`.
-2. If user requests ALT Linux, generator must include `RedHat` in `os_family`.
-3. If user requests Windows, generator must include `Windows` in `os_family` and `windows` in `os`.
-4. For mixed targets, keep all requested branches in one formula and route behavior via `map.jinja`.
+1. Astra Linux в запросе → в JSON `os_family` включает `Debian`.
+2. ALT Linux в запросе → в JSON `os_family` включает `RedHat`.
+3. Windows в запросе → `os_family` включает `Windows`, `os` включает `"windows"`.
+4. Смешанные цели — одна формула, ветки в `map_defaults` (default + Debian + RedHat + Windows).
 
 ## Package logic by OS family
 - Debian/Astra:
@@ -50,10 +51,13 @@ Define deterministic branching rules for Linux and Windows when generating formu
   - `windows.method` / `windows.winrepo_name` / `windows.chocolatey_name` for Windows.
 
 ## Required implementation guard
-All generated SLS and Jinja files must avoid hardcoded formula names and use:
+
+Сгенерированные SLS (рендерер) и примеры в RAG используют:
 
 ```jinja
 {%- set tplroot = tpldir.split('/')[0] %}
 ```
 
-See also: `12-repos-winrepo-pillar.md`.
+Не хардкодить имя формулы в путях `salt://`.
+
+See also: `12-repos-winrepo-pillar.md`, `11-json-spec-contract.md`.

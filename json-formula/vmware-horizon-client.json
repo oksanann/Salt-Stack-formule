@@ -1,0 +1,121 @@
+{
+  "name": "vmware-horizon-client",
+  "top_level_dir": "vmware-horizon-client",
+  "os": ["linux", "windows"],
+  "os_family": ["Debian", "RedHat", "Windows"],
+  "summary": "Установка Omnissa Horizon Client (VMware Horizon View Client)",
+  "description": "Формула установки Omnissa Horizon Client на Astra Linux (Debian), ALT Linux (RedHat) и Windows. Linux: пакет Omnissa-Horizon-Client — только из внутреннего mirror (pillar lookup.repo.name); публичного apt/yum репозитория Omnissa нет. Windows по умолчанию: winrepo (без URL). Альтернатива installer: загрузить .exe с Customer Connect Omnissa, положить на внутренний файловый сервер и указать реальный installer_url в pillar.",
+  "with_repo": true,
+  "release": 1,
+  "pillar_lookup": {
+    "pkg": {
+      "name": "Omnissa-Horizon-Client",
+      "version": "",
+      "fromrepo": "omnissa-horizon-client"
+    },
+    "repo": {
+      "name": "",
+      "disabled": false,
+      "comps": "main",
+      "conf_name": "omnissa-horizon-client",
+      "key_file": "https://packages.omnissa.com/horizon/keys/OMNISSA-PACKAGING-GPG-RSA-KEY.pub",
+      "key_file_dearmor": true,
+      "key_keyrings_dir": "/etc/apt/keyrings/",
+      "required_packages": ["gpg"],
+      "file": "/etc/apt/sources.list.d/omnissa-horizon-client.list",
+      "humanname": "Omnissa Horizon Client"
+    },
+    "windows": {
+      "method": "winrepo",
+      "winrepo_name": "omnissa-horizon-client",
+      "chocolatey_name": "omnissa-horizon-client",
+      "installer_url": "",
+      "installer_path": "C:\\Windows\\Temp\\Omnissa-Horizon-Client-setup.exe",
+      "install_args": "/silent /norestart",
+      "uninstall_name": "Omnissa Horizon Client"
+    }
+  },
+  "map_defaults": {
+    "default": {
+      "pkg": {
+        "name": "Omnissa-Horizon-Client",
+        "version": "",
+        "fromrepo": "omnissa-horizon-client"
+      },
+      "repo": {
+        "name": "",
+        "disabled": false,
+        "comps": "main",
+        "conf_name": "omnissa-horizon-client",
+        "key_file": "https://packages.omnissa.com/horizon/keys/OMNISSA-PACKAGING-GPG-RSA-KEY.pub",
+        "key_file_dearmor": true,
+        "key_keyrings_dir": "/etc/apt/keyrings/",
+        "required_packages": ["gpg"],
+        "file": "",
+        "humanname": "Omnissa Horizon Client"
+      },
+      "windows": {
+        "method": "winrepo",
+        "winrepo_name": "omnissa-horizon-client",
+        "chocolatey_name": "omnissa-horizon-client",
+        "installer_url": "",
+        "installer_path": "C:\\Windows\\Temp\\Omnissa-Horizon-Client-setup.exe",
+        "install_args": "/silent /norestart",
+        "uninstall_name": "Omnissa Horizon Client"
+      }
+    },
+    "Debian": {
+      "repo": {
+        "name": "",
+        "comps": "main",
+        "file": "/etc/apt/sources.list.d/omnissa-horizon-client.list",
+        "humanname": "Omnissa Horizon Client",
+        "key_file_dearmor": true,
+        "key_keyrings_dir": "/etc/apt/keyrings/",
+        "required_packages": ["gpg"]
+      }
+    },
+    "RedHat": {
+      "repo": {
+        "name": "",
+        "key_file": "https://packages.omnissa.com/horizon/keys/OMNISSA-PACKAGING-GPG-RSA-KEY.pub",
+        "key_file_dearmor": false,
+        "key_keyrings_dir": "/etc/pki/rpm-gpg/",
+        "required_packages": [],
+        "file": "/etc/yum.repos.d/omnissa-horizon-client.repo",
+        "humanname": "Omnissa Horizon Client"
+      },
+      "pkg": {
+        "name": "Omnissa-Horizon-Client",
+        "version": ""
+      }
+    },
+    "Windows": {
+      "pkg": {
+        "name": "omnissa-horizon-client",
+        "version": "",
+        "fromrepo": ""
+      },
+      "repo": {
+        "name": "",
+        "disabled": true
+      }
+    }
+  },
+  "windows": {
+    "method": "winrepo",
+    "winrepo_name": "omnissa-horizon-client"
+  },
+  "notes": [
+    "Product rebranded: VMware Horizon Client -> Omnissa Horizon Client",
+    "Linux package: Omnissa-Horizon-Client (.deb/.rpm) — скачать с Customer Connect, разложить во внутренний mirror",
+    "No public Omnissa apt/yum repo — pillar lookup.repo.name = URL вашего mirror (не placeholder)",
+    "Official GPG key (public): https://packages.omnissa.com/horizon/keys/OMNISSA-PACKAGING-GPG-RSA-KEY.pub",
+    "Windows default: winrepo omnissa-horizon-client — installer_url не нужен",
+    "Windows installer method: скачать Omnissa-Horizon-Client-YYMM-x.x.x-build.exe с https://customerconnect.omnissa.com (логин), выложить на свой HTTP/SMB, указать реальный installer_url в pillar",
+    "installer_path — только локальный путь на minion (C:\\Windows\\Temp\\...), не URL",
+    "Windows silent install: /silent /norestart",
+    "Windows chocolatey: omnissa-horizon-client (vmware-horizon-client deprecated)",
+    "Legacy winrepo name may be vmware-horizon-client — override via pillar lookup.windows.winrepo_name"
+  ]
+}

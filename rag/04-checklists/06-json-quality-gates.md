@@ -33,10 +33,6 @@ find dist/<name>-formula -type f -empty
 - [ ] package содержит реальное состояние (`pkg.installed` / winrepo / chocolatey)
 - [ ] repository присутствует только при `with_repo=true`
 
-## Legacy: bash от ИИ
+## Legacy
 
-Не рекомендуется. Если всё же bash:
-- использовать `write_file` + `fail_if_empty` (`10-bash-generator-reference.md`);
-- для package+repo+Windows лучше JSON+renderer или Python-сборщик.
-
-См. также: `11-json-spec-contract.md`, `12-repos-winrepo-pillar.md`.
+Не рекомендуется. Bash/Python-сборщики от ИИ удалены из `01-rules/`. Используйте только JSON + `render_formula.sh`.
