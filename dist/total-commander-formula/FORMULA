@@ -1,0 +1,13 @@
+name: total-commander
+os:
+  - linux
+  - windows
+os_family:
+  - Debian
+  - RedHat
+  - Windows
+version: 202608
+release: 1
+summary: "Установка Total Commander"
+description: "Формула установки Total Commander на Astra Linux (Debian), ALT Linux (RedHat) и Windows. Linux: нативного пакета Ghisler нет — .deb/.rpm из внутреннего mirror (pillar lookup.repo.name). Windows по умолчанию: winrepo; альтернатива chocolatey или installer через pillar."
+top_level_dir: total-commander
