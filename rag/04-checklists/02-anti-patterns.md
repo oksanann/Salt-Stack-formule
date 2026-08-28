@@ -52,10 +52,8 @@ priority: 4
 - Package/repo-формулу строить как `tpl-script`
 - Игнорировать ближайший `tpl-*` или finalized package-pattern без причины
 
-## Сборка (render / legacy bash)
+## Сборка (render_formula.sh)
 
 - Пустые файлы / только комментарии-заглушки
-- `touch` без содержимого
-- Heredoc без `'EOF'` для Jinja (legacy bash)
-- Self-check только на существование файла, без `-s` (non-empty)
-- Выдуманные модули Salt
+- Self-check рендерера не пройден (скрипт завершился с ошибкой)
+- Выдуманные модули Salt в сгенерированных SLS

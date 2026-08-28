@@ -43,5 +43,5 @@ User → LLM (JSON only) → spec.json → render_formula.sh → <name>-formula/
 - Check smoke-test checklist (`05-postgen-smoke-test.md`).
 
 ## Do not
-- Generate bash/Python builder in JSON mode.
-- Skip self-check after render.
+- Generate bash/Python builder — only JSON spec + render_formula.sh
+- Skip self-check after render

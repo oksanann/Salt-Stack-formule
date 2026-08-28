@@ -1,0 +1,13 @@
+name: vmware-horizon-client
+os:
+  - linux
+  - windows
+os_family:
+  - Debian
+  - RedHat
+  - Windows
+version: 202608
+release: 1
+summary: "Установка Omnissa Horizon Client (VMware Horizon View Client)"
+description: "Формула установки Omnissa Horizon Client на Astra Linux (Debian), ALT Linux (RedHat) и Windows. Linux: пакет Omnissa-Horizon-Client — только из внутреннего mirror (pillar lookup.repo.name); публичного apt/yum репозитория Omnissa нет. Windows по умолчанию: winrepo (без URL). Альтернатива installer: загрузить .exe с Customer Connect Omnissa, положить на внутренний файловый сервер и указать реальный installer_url в pillar."
+top_level_dir: vmware-horizon-client

@@ -93,3 +93,19 @@ pillar:{{formula-name}}.lookup
 ## Правило отката
 
 `clean` всегда должен полностью откатывать то, что сделал apply, в обратном порядке. Нельзя оставлять «хвосты» (файлы, сервисы, пакеты, ключи репозитория).
+
+## Модель `formula_kind=security-baseline` (Linux)
+
+Рендерер создаёт отдельную модель состояний (не package/repository):
+
+| Состояние | Назначение |
+|-----------|------------|
+| `{{formula-name}}` | Meta apply: packages → ssh → sysctl → services (по toggles) |
+| `{{formula-name}}.check` | Meta check: compliance без remediation |
+| `{{formula-name}}.clean` | Meta rollback (обратный порядок) |
+| `{{formula-name}}.ssh` | SSH hardening drop-in |
+| `{{formula-name}}.sysctl` | Параметры ядра |
+| `{{formula-name}}.services` | Stop/disable лишних сервисов |
+| `{{formula-name}}.packages` | required / forbidden пакеты |
+
+JSON-спека: `formula_kind: security-baseline`, см. `examples/specs/security-baseline.json`.

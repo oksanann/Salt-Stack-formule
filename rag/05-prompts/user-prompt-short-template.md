@@ -1,17 +1,20 @@
-# User prompt short template
+# User prompt: короткий шаблон (JSON)
 
-Сгенерируй один полный bash-скрипт для создания Salt-формулы.
+Сгенерируй **только JSON-спецификацию** Salt-формулы по контракту 11-json-spec-contract.md.
 
 Параметры:
-- name: <formula-name>
-- targets: <Astra Linux/ALT Linux/Windows>
-- with_repo: <true|false>
-- windows_strategy: <win_pkg|msi|cmd.run>
-- summary: <short summary>
-- description: <detailed description>
+- name: `<formula-name>`
+- top_level_dir: `<formula-name>`
+- os / os_family: `<Astra/ALT/Windows — нормализуй>`
+- with_repo: `<true|false>`
+- summary / description: `<на русском>`
 
-Ограничения:
-- Соблюдай структуру `<top_level_dir>-formula` и обязательные файлы.
-- Включи `map.jinja` и поддержку `lookup` через pillar.
-- Используй `date +%Y%m` для FORMULA version.
-- Добавь self-check в конце скрипта.
+Windows (если нужен):
+- method: winrepo (по умолчанию)
+- winrepo_name: `<имя в winrepo>`
+
+Формат ответа:
+1) одно предложение
+2) блок ```json
+3) команда:
+   `./rag/tools/render_formula.sh --spec ./json-formula/<name>.json --out ./dist`
